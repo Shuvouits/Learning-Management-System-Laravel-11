@@ -117,15 +117,3 @@
 
 @endsection
 
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#Photo').on('change', function(event) {
-                const [file] = event.target.files;
-                if (file) {
-                    $('#photoPreview').attr('src', URL.createObjectURL(file));
-                }
-            });
-        });
-    </script>
-@endpush

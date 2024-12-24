@@ -2,14 +2,15 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\backend\ProfileController;
+use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\instructor\InstructorController;
 use App\Http\Controllers\instructor\InstructorProfileController;
 use App\Http\Controllers\user\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+Route::get('/', [FrontendController::class, 'index']);
 
 
 /*
