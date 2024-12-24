@@ -14,6 +14,8 @@
     <title>Learning Management System</title>
 </head>
 
+
+
 <body>
     <!--wrapper-->
     <div class="wrapper">
@@ -41,7 +43,7 @@
 
 
     @include('backend.section.script')
-    
+
 </body>
 
 </html>

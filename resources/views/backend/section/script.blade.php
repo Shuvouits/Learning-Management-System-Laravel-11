@@ -12,8 +12,40 @@
    <!-- app JS -->
    <script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
+   <!----Sweet Alert---->
+
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+
        <script>
            new PerfectScrollbar(".app-container")
        </script>
+
+<script>
+    @if (session('success'))
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: '{{ session('success') }}',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            background: '#fff',
+        });
+    @elseif (session('error'))
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: '{{ session('error') }}',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            background: '#fff',
+        });
+
+    @endif
+</script>
+
 
        @stack('scripts')

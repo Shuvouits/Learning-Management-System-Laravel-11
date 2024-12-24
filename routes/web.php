@@ -25,6 +25,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/setting', [ProfileController::class, 'setting'])->name('setting');
+    Route::post('/password/setting', [ProfileController::class, 'passwordSetting'])->name('passwordSetting');
     Route::post('/profile/store', [ProfileController::class, 'store'])->name('profile.store');
 
     Route::post('/logout', [AdminController::class, 'destroy'])
