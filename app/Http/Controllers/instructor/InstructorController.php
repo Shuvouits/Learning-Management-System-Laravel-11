@@ -7,7 +7,15 @@ use Illuminate\Http\Request;
 
 class InstructorController extends Controller
 {
+
+    public function login(){
+
+        return view('backend.instructor.login');
+
+    }
+
+
     public function dashboard(){
-        return view('admin.instructor.index');
+        return view('backend.instructor.index');
     }
 }

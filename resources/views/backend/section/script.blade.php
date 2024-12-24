@@ -16,36 +16,50 @@
 
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
 
-       <script>
-           new PerfectScrollbar(".app-container")
-       </script>
+   <script>
+       new PerfectScrollbar(".app-container")
+   </script>
 
-<script>
-    @if (session('success'))
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'success',
-            title: '{{ session('success') }}',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            background: '#fff',
-        });
-    @elseif (session('error'))
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'error',
-            title: '{{ session('error') }}',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            background: '#fff',
-        });
+   <!----Photo Preview Script ----->
 
-    @endif
-</script>
+   <script>
+       $(document).ready(function() {
+           $('#Photo').on('change', function(event) {
+               const [file] = event.target.files;
+               if (file) {
+                   $('#photoPreview').attr('src', URL.createObjectURL(file));
+               }
+           });
+       });
+   </script>
+
+   
+
+   <script>
+       @if (session('success'))
+           Swal.fire({
+               toast: true,
+               position: 'top-end',
+               icon: 'success',
+               title: '{{ session('success') }}',
+               showConfirmButton: false,
+               timer: 3000,
+               timerProgressBar: true,
+               background: '#fff',
+           });
+       @elseif (session('error'))
+           Swal.fire({
+               toast: true,
+               position: 'top-end',
+               icon: 'error',
+               title: '{{ session('error') }}',
+               showConfirmButton: false,
+               timer: 3000,
+               timerProgressBar: true,
+               background: '#fff',
+           });
+       @endif
+   </script>
 
 
-       @stack('scripts')
+   @stack('scripts')
