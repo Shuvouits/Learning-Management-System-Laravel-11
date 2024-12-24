@@ -32,11 +32,11 @@ class AuthenticatedSessionController extends Controller
         $user = $request->user();
 
         if ($user->isAdmin()) {
-            return redirect('/admin-dashboard');
+            return redirect('/admin/dashboard');
         } elseif ($user->isInstructor()) {
-            return redirect('/instructor-dashboard');
+            return redirect('/instructor/dashboard');
         } else {
-            return redirect('/user-dashboard');
+            return redirect('/user/dashboard');
         }
 
        // return redirect()->intended(route('dashboard', absolute: false));
