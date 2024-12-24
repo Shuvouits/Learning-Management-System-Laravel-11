@@ -17,8 +17,14 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');  */
 
 
+Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
+
+
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    Route::post('/admin-logout', [AdminController::class, 'destroy'])
+        ->name('admin.logout'); 
 });
 
 
