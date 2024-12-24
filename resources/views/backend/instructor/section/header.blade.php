@@ -667,13 +667,13 @@
                     <li><a class="dropdown-item d-flex align-items-center" href="{{route('instructor.profile')}}"><i
                                 class="bx bx-user fs-5"></i><span>Profile</span></a>
                     </li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="{{route('admin.setting')}}"><i
+                    <li><a class="dropdown-item d-flex align-items-center" href="{{route('instructor.setting')}}"><i
                                 class="bx bx-cog fs-5"></i><span>Settings</span></a>
                     </li>
 
 
                     <li>
-                        <form method="POST" action="{{ route('admin.logout') }}">
+                        <form method="POST" action="{{ route('instructor.logout') }}">
                             @csrf
                             <button type="submit" class="dropdown-item d-flex align-items-center">
                                 <i class="bx bx-log-out-circle"></i>
