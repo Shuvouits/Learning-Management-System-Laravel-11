@@ -408,11 +408,19 @@
                                                                     <i class="la la-question mr-1"></i> Help
                                                                 </a>
                                                             </li>
+
                                                             <li>
-                                                                <a href="index.html">
+                                                                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                                     <i class="la la-power-off mr-1"></i> Logout
                                                                 </a>
                                                             </li>
+                                                            <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                                                                @csrf
+                                                            </form>
+
+                                                           
+
+
                                                             <li>
                                                                 <div class="section-block"></div>
                                                             </li>
