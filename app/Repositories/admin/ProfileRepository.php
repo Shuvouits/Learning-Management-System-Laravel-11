@@ -31,10 +31,13 @@ class ProfileRepository
         }
 
         // Manually assign other fields from $data
+        $profile->first_name = $data['first_name'] ?? $profile->first_name;
+        $profile->last_name = $data['last_name'] ?? $profile->last_name;
         $profile->name = $data['name'] ?? $profile->name;
         $profile->email = $data['email'] ?? $profile->email;
         $profile->phone = $data['phone'] ?? $profile->phone;
         $profile->address = $data['address'] ?? $profile->address;
+        $profile->bio = $data['bio'] ?? $profile->bio;
 
         // Save the intro
         $profile->save();

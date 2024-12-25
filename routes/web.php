@@ -6,6 +6,7 @@ use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\instructor\InstructorController;
 use App\Http\Controllers\instructor\InstructorProfileController;
 use App\Http\Controllers\user\UserController;
+use App\Http\Controllers\user\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -53,6 +54,12 @@ Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::post('/logout', [UserController::class, 'destroy'])
     ->name('logout');
+
+    Route::get('/profile', [UserProfileController::class, 'index'])->name('profile');
+    Route::post('/profile/store', [UserProfileController::class, 'store'])->name('profile.store');
+    Route::get('/setting', [UserProfileController::class, 'setting'])->name('setting');
+    Route::post('/password/setting', [UserProfileController::class, 'passwordSetting'])->name('passwordSetting');
+
 });
 
 

@@ -37,6 +37,8 @@
                                 </svg>
                             </button>
                         </div>
+
+                        @if(!auth()->user())
                         <ul
                             class="generic-list-item d-flex flex-wrap align-items-center fs-14 border-left border-left-gray pl-3 ml-3">
                             <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i
@@ -44,6 +46,7 @@
                             <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a
                                     href="sign-up.html"> Register</a></li>
                         </ul>
+                        @endif
                     </div><!-- end header-widget -->
                 </div><!-- end col-lg-6 -->
             </div><!-- end row -->
