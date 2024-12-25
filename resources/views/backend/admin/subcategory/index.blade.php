@@ -4,13 +4,13 @@
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Category</div>
+            <div class="breadcrumb-title pe-3">SubCategory</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">All Category</li>
+                        <li class="breadcrumb-item active" aria-current="page">All SubCategory</li>
                     </ol>
                 </nav>
             </div>
@@ -18,8 +18,8 @@
         </div>
         <!--end breadcrumb-->
         <div style="display: flex; align-items:center; justify-content:space-between">
-            <h6 class="mb-0 text-uppercase">All Categories</h6>
-            <a href="{{route('admin.category.create')}}" class="btn btn-primary">Add Category</a>
+            <h6 class="mb-0 text-uppercase">All SubCategories</h6>
+            <a href="{{route('admin.subcategory.create')}}" class="btn btn-primary">Add SubCategory</a>
 
         </div>
 
@@ -33,21 +33,23 @@
                                 <th>NO</th>
                                 <th>Name</th>
                                 <th>Slug</th>
+                                <th>Category</th>
                                 <th>Image</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($all_categories as $index=>$item)
+                            @foreach($all_subcategories as $index=>$item)
                             <tr>
                                 <td>{{$index+1}}</td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->slug}}</td>
+                                <td>{{$item->category->name}}</td>
                                 <td>
-                                    <img src="{{asset($item->image)}}" width="60" height="60" />
+                                    <img src="{{asset($item->category->image)}}" width="60" height="60" />
                                 </td>
                                 <td>
-                                    <a href="{{route('admin.category.edit', $item->id)}}" class="btn btn-primary">
+                                    <a href="{{route('admin.subcategory.edit', $item->id)}}" class="btn btn-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
@@ -90,7 +92,7 @@
         e.preventDefault();
 
         let categoryId = $(this).data('id');
-        let deleteUrl = "{{ route('admin.category.destroy', ':id') }}".replace(':id', categoryId);
+        let deleteUrl = "{{ route('admin.subcategory.destroy', ':id') }}".replace(':id', categoryId);
 
         Swal.fire({
             title: 'Are you sure?',

@@ -29,7 +29,7 @@
             <ul>
                 <li> <a href="{{route('admin.category.index')}}"><i class='bx bx-radio-circle'></i>All Category</a>
                 </li>
-                <li> <a href="app-chat-box.html"><i class='bx bx-radio-circle'></i>All SubCategory</a>
+                <li> <a href="{{route('admin.subcategory.index')}}"><i class='bx bx-radio-circle'></i>All SubCategory</a>
                 </li>
 
             </ul>
