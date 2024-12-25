@@ -12,6 +12,9 @@
    <!-- app JS -->
    <script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
+   <script src="{{asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+   <script src="{{asset('backend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
+
    <!----Sweet Alert---->
 
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
@@ -20,20 +23,28 @@
        new PerfectScrollbar(".app-container")
    </script>
 
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+      } );
+</script>
+
    <!----Photo Preview Script ----->
 
    <script>
-       $(document).ready(function() {
-           $('#Photo').on('change', function(event) {
-               const [file] = event.target.files;
-               if (file) {
-                   $('#photoPreview').attr('src', URL.createObjectURL(file));
-               }
-           });
-       });
-   </script>
+    $(document).ready(function() {
+        $('#Photo').on('change', function(event) {
+            const [file] = event.target.files;
+            if (file) {
+                $('#photoPreview')
+                    .attr('src', URL.createObjectURL(file))
+                    .css('display', 'block'); // Show the image preview
+            }
+        });
+    });
+</script>
 
-   
+
 
    <script>
        @if (session('success'))
@@ -60,6 +71,30 @@
            });
        @endif
    </script>
+
+<script>
+    $(document).on('click', '.delete-category', function (e) {
+        e.preventDefault();
+
+        let categoryId = $(this).data('id');
+        let deleteUrl = "{{ route('admin.category.destroy', ':id') }}".replace(':id', categoryId);
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#delete-form').attr('action', deleteUrl).submit();
+            }
+        });
+    });
+</script>
+
 
 
    @stack('scripts')

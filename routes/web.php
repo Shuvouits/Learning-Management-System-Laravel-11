@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\instructor\InstructorController;
@@ -33,6 +34,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::post('/profile/store', [ProfileController::class, 'store'])->name('profile.store');
     Route::get('/setting', [ProfileController::class, 'setting'])->name('setting');
     Route::post('/password/setting', [ProfileController::class, 'passwordSetting'])->name('passwordSetting');
+
+    Route::resource('category', CategoryController::class);
 
 
 
