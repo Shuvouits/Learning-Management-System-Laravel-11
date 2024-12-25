@@ -22,8 +22,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');  */
 
 
+
+/* Admin Route   */
+
+
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
-Route::get('/instructor/login', [InstructorController::class, 'login'])->name('instructor.login');
+
 
 
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
@@ -43,6 +47,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
 
 });
 
+/*   Instructor Route  */
+
+Route::get('/instructor/login', [InstructorController::class, 'login'])->name('instructor.login');
+Route::get('/instructor/register', [InstructorController::class, 'register'])->name('instructor.register');
+Route::post('/instructor/register', [InstructorController::class, 'create'])->name('instructor.register');
 
 Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')->name('instructor.')->group(function () {
     Route::get('/dashboard', [InstructorController::class, 'dashboard'])->name('dashboard');

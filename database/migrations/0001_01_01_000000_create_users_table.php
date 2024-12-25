@@ -25,6 +25,12 @@ return new class extends Migration
             $table->enum('role', ['user', 'instructor', 'admin'])->default('user');
             $table->enum('status', ['0','1'])->default('1');
             $table->longText('bio')->nullable();
+            $table->integer('day')->nullable();
+            $table->string('month')->nullable();
+            $table->integer('year')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
+            $table->enum('gender', ['male', 'female'])->default('male');
             $table->rememberToken();
             $table->timestamps();
         });
