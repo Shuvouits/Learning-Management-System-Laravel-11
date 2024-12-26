@@ -20,6 +20,7 @@
             </a>
 
         </li>
+
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -30,6 +31,21 @@
                 <li> <a href="{{route('admin.category.index')}}"><i class='bx bx-radio-circle'></i>All Category</a>
                 </li>
                 <li> <a href="{{route('admin.subcategory.index')}}"><i class='bx bx-radio-circle'></i>All SubCategory</a>
+                </li>
+
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Manage Instructor</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('admin.instructor.index')}}"><i class='bx bx-radio-circle'></i>All Instructor</a>
+                </li>
+                <li> <a href="{{route('admin.instructor.active')}}"><i class='bx bx-radio-circle'></i>Active Instructor</a>
                 </li>
 
             </ul>

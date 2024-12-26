@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\AdminInstructorController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SubcategoryController;
 use App\Http\Controllers\backend\ProfileController;
@@ -35,13 +36,26 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::post('/logout', [AdminController::class, 'destroy'])
     ->name('logout');
 
+    /*  control Profile */
+
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/profile/store', [ProfileController::class, 'store'])->name('profile.store');
     Route::get('/setting', [ProfileController::class, 'setting'])->name('setting');
     Route::post('/password/setting', [ProfileController::class, 'passwordSetting'])->name('passwordSetting');
 
+    /*  control Category & Subcategory  */
+
     Route::resource('category', CategoryController::class);
     Route::resource('subcategory', SubcategoryController::class);
+
+    /* control instructor  */
+    Route::resource('instructor', AdminInstructorController::class);
+    Route::post('/update-status', [AdminInstructorController::class, 'updateStatus'])->name('instructor.status');
+    Route::get('/instructor-active-list', [AdminInstructorController::class, 'instructorActive'])->name('instructor.active');
+
+
+
+
 
 
 
