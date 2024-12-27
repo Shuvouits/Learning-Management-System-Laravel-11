@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SubcategoryController;
 use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\frontend\FrontendController;
+use App\Http\Controllers\instructor\CourseController;
 use App\Http\Controllers\instructor\InstructorController;
 use App\Http\Controllers\instructor\InstructorProfileController;
 use App\Http\Controllers\user\UserController;
@@ -76,6 +77,10 @@ Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')
     Route::post('/profile/store', [InstructorProfileController::class, 'store'])->name('profile.store');
     Route::get('/setting', [InstructorProfileController::class, 'setting'])->name('setting');
     Route::post('/password/setting', [InstructorProfileController::class, 'passwordSetting'])->name('passwordSetting');
+
+    Route::resource('course', CourseController::class);
+    Route::get('/get-subcategories/{categoryId}', [CategoryController::class, 'getSubcategories']);
+
 });
 
 Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user.')->group(function () {

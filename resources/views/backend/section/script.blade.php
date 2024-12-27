@@ -12,8 +12,8 @@
    <!-- app JS -->
    <script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
-   <script src="{{asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
-   <script src="{{asset('backend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
+   <script src="{{ asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+   <script src="{{ asset('backend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
 
    <!----Sweet Alert---->
 
@@ -22,32 +22,36 @@
    <!------Select2----->
 
    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-	<script src="{{asset('backend/assets/plugins/select2/js/select2-custom.js')}}"></script>
+   <script src="{{ asset('backend/assets/plugins/select2/js/select2-custom.js') }}"></script>
+
+   <!-- summernote JS -->
+
+   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
    <script>
        new PerfectScrollbar(".app-container")
    </script>
 
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-      } );
-</script>
+   <script>
+       $(document).ready(function() {
+           $('#example').DataTable();
+       });
+   </script>
 
    <!----Photo Preview Script ----->
 
    <script>
-    $(document).ready(function() {
-        $('#Photo').on('change', function(event) {
-            const [file] = event.target.files;
-            if (file) {
-                $('#photoPreview')
-                    .attr('src', URL.createObjectURL(file))
-                    .css('display', 'block'); // Show the image preview
-            }
-        });
-    });
-</script>
+       $(document).ready(function() {
+           $('#Photo').on('change', function(event) {
+               const [file] = event.target.files;
+               if (file) {
+                   $('#photoPreview')
+                       .attr('src', URL.createObjectURL(file))
+                       .css('display', 'block'); // Show the image preview
+               }
+           });
+       });
+   </script>
 
 
 
@@ -76,6 +80,26 @@
            });
        @endif
    </script>
+
+
+<script>
+    $(document).ready(function() {
+        $('.summernote').summernote({
+            height: 200, // Set the height of the editor
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    });
+</script>
 
 
 
