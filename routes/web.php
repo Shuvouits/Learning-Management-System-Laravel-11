@@ -7,8 +7,10 @@ use App\Http\Controllers\admin\SubcategoryController;
 use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\instructor\CourseController;
+use App\Http\Controllers\instructor\CourseSectionController;
 use App\Http\Controllers\instructor\InstructorController;
 use App\Http\Controllers\instructor\InstructorProfileController;
+use App\Http\Controllers\instructor\LectureController;
 use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\UserProfileController;
 use Illuminate\Support\Facades\Route;
@@ -80,6 +82,11 @@ Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')
 
     Route::resource('course', CourseController::class);
     Route::get('/get-subcategories/{categoryId}', [CategoryController::class, 'getSubcategories']);
+
+    Route::resource('course-section', CourseSectionController::class);
+    Route::resource('lecture', LectureController::class);
+
+   // Route::get('/course-section/{id}', [CourseSectionController::class, 'index'])->name('course-section');
 
 });
 

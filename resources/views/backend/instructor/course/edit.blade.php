@@ -91,7 +91,7 @@
 
                         <div class="col-md-10">
                             <label for="image" class="form-label">Image</label>
-                            <input type="file" class="form-control" name="image" id="Photo">
+                            <input type="file" class="form-control" name="image" id="Photo" accept="image/*">
                         </div>
                         <div class="col-md-2">
 

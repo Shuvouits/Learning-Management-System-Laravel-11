@@ -35,7 +35,8 @@
                                 <th>Course Name</th>
                                 <th>Category</th>
                                 <th>SubCategory</th>
-                                <th>Price</th>
+                                <th>Selling Price</th>
+                                <th>Discount Price</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -45,7 +46,7 @@
                                 <td>{{$index+1}}</td>
                                 <td>
                                     @if($item->course_image)
-                                    <img src="{{asset($item->course_image)}}"  width="70" height="70"/>
+                                    <img src="{{asset($item->course_image)}}"  width="140" height="70"/>
                                     @else
                                     <span>No image found</span>
                                     @endif
@@ -59,8 +60,14 @@
                                     {{$item->subCategory['name'] ?? Null}}
                                 </td>
                                 <td>
-                                    {{$item->discount_price ? $item->discount_price : $item->selling_price}}
+                                    {{$item->selling_price}}
                                 </td>
+
+                                <td>
+                                    {{$item->discount_price}}
+                                </td>
+
+
                                 <td>
                                     <a href="{{route('instructor.course.edit', $item->id)}}" class="btn btn-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -79,6 +86,13 @@
                                         @csrf
                                         @method('DELETE')
                                     </form>
+
+                                    <a href="{{route('instructor.course-section.show', $item->id)}}" class="btn btn-success" style="margin-left:10px">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
+                                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
+                                            <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
+                                          </svg>
+                                    </a>
 
 
 
