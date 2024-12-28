@@ -24,15 +24,7 @@
 <!---Subscribe area--->
 
 
-<div class="section-block"></div>
 
-
-
-<div class="section-block"></div>
-
-
-
-<div class="section-block"></div>
 
 
 

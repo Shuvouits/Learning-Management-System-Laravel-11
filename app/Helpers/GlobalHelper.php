@@ -21,3 +21,9 @@ if (!function_exists('getCourseCategories')) {
         return Category::with('course', 'course.user', 'course.course_goal')->get();
     }
 }
+
+if (!function_exists('getCategories')) {
+    function getCategories() {
+        return Category::with('subcategory')->get();
+    }
+}

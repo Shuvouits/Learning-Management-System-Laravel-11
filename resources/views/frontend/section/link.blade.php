@@ -15,4 +15,36 @@
 <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap-select.min.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/fancybox.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/tooltipster.bundle.css') }}">
+<link rel="stylesheet" href="{{asset('frontend/css/plyr.css')}}">
 <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+
+<style>
+    .description-collapsible {
+    max-height: 100px; /* Limit height for collapsed view */
+    overflow: hidden; /* Hide overflow content */
+    transition: max-height 0.3s ease; /* Smooth transition for toggle */
+}
+
+.description-collapsible.expanded {
+    max-height: none; /* Remove height restriction for expanded view */
+}
+
+
+.bio-collapsible {
+    max-height: 600px; /* Limit height for collapsed view */
+    overflow: hidden; /* Hide overflow content */
+    transition: max-height 0.3s ease; /* Smooth transition */
+}
+
+.bio-full-text {
+    display: none; /* Initially hide full bio content */
+}
+
+.bio-collapsible.expanded {
+    max-height: none; /* Remove height restriction for expanded view */
+}
+
+
+
+
+</style>
