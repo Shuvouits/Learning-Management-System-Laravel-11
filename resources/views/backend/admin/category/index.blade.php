@@ -44,7 +44,11 @@
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->slug}}</td>
                                 <td>
+                                    @if($item->image)
                                     <img src="{{asset($item->image)}}" width="60" height="60" />
+                                    @else
+                                    <span>No image found</span>
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="{{route('admin.category.edit', $item->id)}}" class="btn btn-primary">

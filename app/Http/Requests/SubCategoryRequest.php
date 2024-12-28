@@ -21,10 +21,12 @@ class SubCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $subcategoryId = $this->route('subcategory');
         return [
             'category_id' => 'required|exists:categories,id', // Must exist in the categories table
-            'name'        => 'required|string|max:255|unique:sub_categories,name',
-            'slug'        => 'required|string|max:255|unique:sub_categories,slug',
+            'name'        => "required|string|max:255|unique:sub_categories,name,{$subcategoryId}",
+           // 'slug'        => 'required|string|max:255|unique:sub_categories,slug',
+            'slug' => "nullable|string|max:255|unique:sub_categories,slug,{$subcategoryId}",
         ];
     }
 }

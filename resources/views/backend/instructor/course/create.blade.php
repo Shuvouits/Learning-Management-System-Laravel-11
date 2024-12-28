@@ -53,24 +53,24 @@
                         <div class="col-md-6">
                             <label for="name" class="form-label">Course Name</label>
                             <input type="text" class="form-control" name="course_name" id="name"
-                                placeholder="Enter the course name" value="{{ old('course_name') }}" >
+                                placeholder="Enter the course name" value="{{ old('course_name') }}" required>
                         </div>
                         <div class="col-md-6">
                             <label for="slug" class="form-label">Slug</label>
                             <input type="text" class="form-control" name="course_name_slug" id="slug"
-                                placeholder="Enter the slug"  value="{{ old('course_name_slug') }}"  >
+                                placeholder="Enter the slug"  value="{{ old('course_name_slug') }}" required >
                         </div>
 
                         <div class="col-md-12">
                             <label for="course_title" class="form-label">Course Title</label>
                             <input type="text" class="form-control" name="course_title" id="course_title"
-                                placeholder="Enter the course title" value="{{ old('course_title') }}" >
+                                placeholder="Enter the course title" value="{{ old('course_title') }}" required>
                         </div>
 
                         <div class="col-md-6">
                             <label for="category" class="form-label">Choose Category</label>
                             <select class="form-select" name="category_id" id="category"
-                                data-placeholder="Choose a category">
+                                data-placeholder="Choose a category" required>
                                 <option value="" disabled selected>Select a category</option>
                                 @foreach ($all_categories as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -81,7 +81,7 @@
                         <div class="col-md-6">
                             <label for="subcategory" class="form-label">Select SubCategory</label>
                             <select class="form-select" name="subcategory_id" id="subcategory"
-                                data-placeholder="Choose a subcategory">
+                                data-placeholder="Choose a subcategory" required>
                                 <option value="" disabled selected>Select a subcategory</option>
                             </select>
                         </div>
@@ -99,7 +99,7 @@
 
                         <div class="col-md-12">
                             <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control summernote" name="description" id="description"> {{ old('description') }} </textarea>
+                            <textarea class="form-control editor" name="description" id="description" required> {{ old('description') }} </textarea>
                         </div>
 
                         <div class="col-md-6">
@@ -162,7 +162,7 @@
 
                         <div class="col-md-12">
                             <label for="prerequisites" class="form-label">Course Prerequisites</label>
-                            <textarea class="form-control summernote" name="prerequisites" id="prerequisites"> {{ old('prerequisites') }}</textarea>
+                            <textarea class="form-control editor" name="prerequisites" id="prerequisites"> {{ old('prerequisites') }}</textarea>
                         </div>
 
                         <div class="col-md-12">
@@ -233,5 +233,7 @@
 @endsection
 
 @push('scripts')
+
+
     <script src="{{ asset('customjs/instructor/course.js') }}"></script>
 @endpush

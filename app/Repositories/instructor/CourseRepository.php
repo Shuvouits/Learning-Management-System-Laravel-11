@@ -63,7 +63,7 @@ class CourseRepository
         }
 
         if ($video) {
-            $data['video'] = $this->uploadFile($photo, 'video', $course->video);
+            $data['video'] = $this->uploadFile($video, 'video', $course->video);
         }
 
          $course->update($data);

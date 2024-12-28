@@ -46,7 +46,11 @@
                                 <td>{{$item->slug}}</td>
                                 <td>{{$item->category->name}}</td>
                                 <td>
+                                    @if($item->category['image'])
                                     <img src="{{asset($item->category->image)}}" width="60" height="60" />
+                                    @else
+                                    <span>No image found</span>
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="{{route('admin.subcategory.edit', $item->id)}}" class="btn btn-primary">

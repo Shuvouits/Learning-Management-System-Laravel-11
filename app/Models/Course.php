@@ -15,4 +15,13 @@ class Course extends Model
     public function subCategory(){
         return $this->belongsTo(SubCategory::class, 'subcategory_id', 'id');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'instructor_id', 'id');
+    }
+
+    public function course_goal(){
+        return $this->hasMany(CourseGoal::class, 'course_id', 'id');
+
+    }
 }

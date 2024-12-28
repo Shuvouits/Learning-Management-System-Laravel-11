@@ -29,7 +29,7 @@ class CourseRequest extends FormRequest
             'course_image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', // Max 2MB
             'course_title' => 'required|string',
             'course_name' => 'required|string',
-            'course_name_slug' => "nullable|string|max:255|unique:courses,course_name_slug,{$courseId}", // Update conditionally
+            'course_name_slug' => "nullable|string|unique:courses,course_name_slug,{$courseId}", // Update conditionally
             'description' => 'required|string',
             'video' => 'nullable|mimes:mp4,mkv,avi|max:51200', // Max 50MB
             'label' => 'nullable|string|max:100',

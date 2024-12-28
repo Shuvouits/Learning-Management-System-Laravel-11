@@ -21,10 +21,12 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $categoryId = $this->route('category');
         return [
 
             'name' => 'required|string|max:255', // Name is required, must be a string, and up to 255 characters
-            'slug' => 'required|string|max:255|unique:categories,slug', // Slug is required, unique, and up to 255 characters
+            //'slug' => 'required|string|max:255|unique:categories,slug,{$categoryId}', // Slug is required, unique, and up to 255 characters
+            'slug' => "nullable|string|max:255|unique:categories,slug,{$categoryId}", // Update conditionally
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048', // Optional image, valid image file, max size 2MB
 
         ];

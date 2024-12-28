@@ -7,6 +7,7 @@ use App\Http\Requests\CourseRequest;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\CourseGoal;
+use App\Models\SubCategory;
 use App\Services\instructor\CourseService;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $all_categories = Category::all();
+       $all_categories = Category::all();
+
         return view('backend.instructor.course.create', compact('all_categories'));
     }
 
