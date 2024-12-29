@@ -54,7 +54,14 @@
                                 <div class="card-body">
                                     <h6 class="ribbon ribbon-blue-bg fs-14 mb-3" style="text-transform:capitalize">{{$course->label}}</h6>
                                     <h5 class="card-title"><a href="{{route('course-details', $course->course_name_slug)}}">{{$course->course_name}}</a></h5>
-                                    <p class="card-text"><a href="teacher-detail.html">{{$course['user']['name']}}</a></p>
+
+                                    <p class="card-text">
+                                        <a href="{{ route('instructor', [$course['user']['name'], $course['user']['id']]) }}">
+                                            {{ $course['user']['name'] }}
+                                        </a>
+                                    </p>
+
+                                    
                                     <div class="rating-wrap d-flex align-items-center py-2">
                                         <div class="review-stars">
                                             <span class="rating-number">4.4</span>

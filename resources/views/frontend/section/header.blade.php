@@ -120,23 +120,20 @@ $category = getCategories();
                             <nav class="main-menu">
                                 <ul>
                                     <li>
-                                        <a href="#">Home <i class="la la-angle-down fs-12"></i></a>
+                                        <a href="/">Home </a>
 
                                     </li>
                                     <li>
-                                        <a href="#">courses <i class="la la-angle-down fs-12"></i></a>
+                                        <a href="#">All Courses </a>
 
                                     </li>
                                     <li>
-                                        <a href="#">Student <i class="la la-angle-down fs-12"></i></a>
+                                        <a href="#">Student</a>
 
                                     </li>
-                                    <li class="mega-menu-has">
-                                        <a href="#">pages <i class="la la-angle-down fs-12"></i></a>
 
-                                    </li>
                                     <li>
-                                        <a href="#">blog <i class="la la-angle-down fs-12"></i></a>
+                                        <a href="#">Blog </a>
 
                                     </li>
                                 </ul><!-- end ul -->

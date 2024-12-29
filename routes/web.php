@@ -22,6 +22,9 @@ Route::get('/', [FrontendController::class, 'index']);
 Route::get('/course-details/{slug}', [FrontendController::class, 'view'])->name('course-details');
 Route::get('/category/{slug}', [FrontendController::class, 'courseCategory'])->name('course-category');
 Route::get('/{category}/{subcategory}', [FrontendController::class, 'courseSubcategory'])->name('course-subcategory');
+Route::get('/all-category', [FrontendController::class, 'allCategory'])->name('all-category');
+
+Route::get('/instructor/{name}/{id}', [FrontendController::class, 'instructor'])->name('instructor');
 
 
 /*

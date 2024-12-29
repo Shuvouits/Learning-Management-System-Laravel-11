@@ -24,6 +24,6 @@ if (!function_exists('getCourseCategories')) {
 
 if (!function_exists('getCategories')) {
     function getCategories() {
-        return Category::with('subcategory')->get();
+        return  Category::with('subcategory')->get();
     }
 }

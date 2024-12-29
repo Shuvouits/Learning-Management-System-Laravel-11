@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\CourseLecture;
 use App\Models\CourseSection;
 use App\Models\SubCategory;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -40,5 +41,18 @@ class FrontendController extends Controller
         $subcategory = SubCategory::where('slug', $subcategory)->first();
         $course = Course::where('subcategory_id', $subcategory->id)->with('user', 'course_goal')->get();
         return view('frontend.pages.subcategory.index', compact('course'));
+    }
+
+    public function allCategory(){
+        return view('frontend.pages.category.all-category');
+    }
+
+    public function instructor($name, $id){
+
+        $user = User::find($id);
+        $user_course = Course::where('instructor_id', $user->id)->get();
+        
+        return view('frontend.pages.instructor.index', compact('user', 'user_course'));
+
     }
 }

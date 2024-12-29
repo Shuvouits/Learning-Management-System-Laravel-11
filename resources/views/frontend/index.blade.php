@@ -6,10 +6,14 @@
 
 <!-----Hero--->
 <!----Feature--->
+@include('frontend.pages.home.feature')
 
 <!----category first--->
-@include('frontend.pages.home.category-second')
+@include('frontend.pages.home.category-first')
+
 <!----category second--->
+@include('frontend.pages.home.category-second')
+
 <!---category third --->
 
 <!---funfact area--->
