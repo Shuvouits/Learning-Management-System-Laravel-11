@@ -1,4 +1,3 @@
-
 <section class="course-area pb-120px">
     <div class="container">
         <div class="section-heading text-center">
@@ -8,12 +7,12 @@
         </div><!-- end section-heading -->
         <ul class="nav nav-tabs generic-tab justify-content-center pb-4" id="myTab" role="tablist">
 
-            @foreach($categories as $index => $item)
-
-            <li class="nav-item">
-                <a class="nav-link {{$index==0 ? 'active' : ''}}" id="{{$item->slug}}-tab" data-toggle="tab" href="#{{$item->slug}}" role="tab"
-                    aria-controls="{{$item->slug}}" aria-selected="true">{{$item->name}}</a>
-            </li>
+            @foreach ($categories as $index => $item)
+                <li class="nav-item">
+                    <a class="nav-link {{ $index == 0 ? 'active' : '' }}" id="{{ $item->slug }}-tab" data-toggle="tab"
+                        href="#{{ $item->slug }}" role="tab" aria-controls="{{ $item->slug }}"
+                        aria-selected="true">{{ $item->name }}</a>
+                </li>
             @endforeach
 
 
@@ -23,69 +22,83 @@
         <div class="container">
             <div class="tab-content" id="myTabContent">
 
-                @foreach($course_category as $index => $data)
-                <div class="tab-pane fade {{$index == 0 ? 'show active' : ''}} " id="{{$data->slug}}" role="tabpanel"
-                    aria-labelledby="{{$data->slug}}-tab">
-                    <div class="row">
+                @foreach ($course_category as $index => $data)
+                    <div class="tab-pane fade {{ $index == 0 ? 'show active' : '' }} " id="{{ $data->slug }}"
+                        role="tabpanel" aria-labelledby="{{ $data->slug }}-tab">
+                        <div class="row">
 
-                        @foreach($data['course'] as $course)
-                        <div class="col-lg-4 responsive-column-half">
-                            <div class="card card-item card-preview" data-tooltip-content="#{{$course->course_name_slug}}">
-                                <div class="card-image">
-                                    <a href="course-details.html" class="d-block">
-                                        <img class="card-img-top lazy" src="{{asset($course->course_image)}}"
-                                            data-src="{{asset($course->course_image)}}" alt="Card image cap">
-                                    </a>
-                                    <div class="course-badge-labels">
-                                        <div class="course-badge">
-                                            @if($course->bestseller == 'yes')
-                                            Bestseller
-                                            @elseif($course->featured == 'yes')
-                                            Featured
-                                            @else
-                                            HighestRated
-                                            @endif
-                                        </div>
-                                        <div class="course-badge blue">
-                                            -{{ round((($course->selling_price - $course->discount_price) / $course->selling_price) * 100) }}%
-                                        </div>
-                                    </div>
-                                </div><!-- end card-image -->
-                                <div class="card-body">
-                                    <h6 class="ribbon ribbon-blue-bg fs-14 mb-3" style="text-transform:capitalize">{{$course->label}}</h6>
-                                    <h5 class="card-title"><a href="{{route('course-details', $course->course_name_slug)}}">{{$course->course_name}}</a></h5>
+                            @foreach ($data['course'] as $course)
+                                <div class="col-lg-4 responsive-column-half">
+                                    <div class="card card-item card-preview"
+                                        data-tooltip-content="#{{ $course->course_name_slug }}">
+                                        <div class="card-image">
+                                            <a href="course-details.html" class="d-block">
+                                                <img class="card-img-top lazy" src="{{ asset($course->course_image) }}"
+                                                    data-src="{{ asset($course->course_image) }}" alt="Card image cap">
+                                            </a>
+                                            <div class="course-badge-labels">
+                                                <div class="course-badge">
+                                                    @if ($course->bestseller == 'yes')
+                                                        Bestseller
+                                                    @elseif($course->featured == 'yes')
+                                                        Featured
+                                                    @else
+                                                        HighestRated
+                                                    @endif
+                                                </div>
+                                                <div class="course-badge blue">
+                                                    -{{ round((($course->selling_price - $course->discount_price) / $course->selling_price) * 100) }}%
+                                                </div>
+                                            </div>
+                                        </div><!-- end card-image -->
+                                        <div class="card-body">
+                                            <h6 class="ribbon ribbon-blue-bg fs-14 mb-3"
+                                                style="text-transform:capitalize">{{ $course->label }}</h6>
+                                            <h5 class="card-title"><a
+                                                    href="{{ route('course-details', $course->course_name_slug) }}">{{ $course->course_name }}</a>
+                                            </h5>
 
-                                    <p class="card-text">
-                                        <a href="{{ route('instructor', [$course['user']['name'], $course['user']['id']]) }}">
-                                            {{ $course['user']['name'] }}
-                                        </a>
-                                    </p>
+                                            <p class="card-text">
+                                                <a
+                                                    href="{{ route('instructor', [$course['user']['name'], $course['user']['id']]) }}">
+                                                    {{ $course['user']['name'] }}
+                                                </a>
+                                            </p>
 
-                                    
-                                    <div class="rating-wrap d-flex align-items-center py-2">
-                                        <div class="review-stars">
-                                            <span class="rating-number">4.4</span>
-                                            <span class="la la-star"></span>
-                                            <span class="la la-star"></span>
-                                            <span class="la la-star"></span>
-                                            <span class="la la-star"></span>
-                                            <span class="la la-star-o"></span>
-                                        </div>
-                                        <span class="rating-total pl-1">(20,230)</span>
-                                    </div><!-- end rating-wrap -->
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="card-price text-black font-weight-bold">${{$course->discount_price}} <span
-                                                class="before-price font-weight-medium">{{$course->selling_price}}</span></p>
-                                        <div class="icon-element icon-element-sm shadow-sm cursor-pointer"
-                                            title="Add to Wishlist"><i class="la la-heart-o"></i></div>
-                                    </div>
-                                </div><!-- end card-body -->
-                            </div><!-- end card -->
-                        </div><!-- end col-lg-4 -->
-                        @endforeach
 
-                    </div><!-- end row -->
-                </div><!-- end tab-pane -->
+                                            <div class="rating-wrap d-flex align-items-center py-2">
+                                                <div class="review-stars">
+                                                    <span class="rating-number">4.4</span>
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star-o"></span>
+                                                </div>
+                                                <span class="rating-total pl-1">(20,230)</span>
+                                            </div><!-- end rating-wrap -->
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <p class="card-price text-black font-weight-bold">
+                                                    ${{ $course->discount_price }} <span
+                                                        class="before-price font-weight-medium">{{ $course->selling_price }}</span>
+                                                </p>
+
+
+
+                                                <div class="icon-element icon-element-sm shadow-sm cursor-pointer wishlist-icon"
+                                                    title="Add to Wishlist" data-course-id="{{ $course->id }}">
+                                                    <i class="la la-heart-o"></i>
+                                                </div>
+
+
+                                            </div>
+                                        </div><!-- end card-body -->
+                                    </div><!-- end card -->
+                                </div><!-- end col-lg-4 -->
+                            @endforeach
+
+                        </div><!-- end row -->
+                    </div><!-- end tab-pane -->
                 @endforeach
 
             </div><!-- end tab-content -->
@@ -100,6 +113,50 @@
 
 <!-- end courses-area -->
 
+@push('scripts')
+<script>
+    $(document).on('click', '.wishlist-icon', function () {
+        var courseId = $(this).data('course-id');
+        var url = '/wishlist/add';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                course_id: courseId,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                Swal.fire({
+                    icon: response.status === 'success' ? 'success' : 'error',
+                    title: response.message,
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+            },
+            error: function (xhr) {
+                let message = 'Something went wrong!';
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    message = xhr.responseJSON.message;
+                }
+
+                Swal.fire({
+                    icon: 'error',
+                    title: message,
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+            }
+        });
+    });
+</script>
+@endpush
 
 
 

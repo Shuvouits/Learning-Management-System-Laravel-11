@@ -19,6 +19,8 @@
     var player = new Plyr('#player');
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     $(document).ready(function() {
         $('.toggleDescription').on('click', function() {
@@ -63,4 +65,6 @@
 });
 
 </script>
+
+@stack('scripts')
 

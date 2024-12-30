@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SubcategoryController;
 use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\frontend\FrontendController;
+use App\Http\Controllers\frontend\WishlistController;
 use App\Http\Controllers\instructor\CourseController;
 use App\Http\Controllers\instructor\CourseSectionController;
 use App\Http\Controllers\instructor\InstructorController;
@@ -21,10 +22,14 @@ Route::get('/', [FrontendController::class, 'index']);
 
 Route::get('/course-details/{slug}', [FrontendController::class, 'view'])->name('course-details');
 Route::get('/category/{slug}', [FrontendController::class, 'courseCategory'])->name('course-category');
-Route::get('/{category}/{subcategory}', [FrontendController::class, 'courseSubcategory'])->name('course-subcategory');
+Route::get('/course/{category}/{subcategory}', [FrontendController::class, 'courseSubcategory'])->name('course-subcategory');
 Route::get('/all-category', [FrontendController::class, 'allCategory'])->name('all-category');
 
 Route::get('/instructor/{name}/{id}', [FrontendController::class, 'instructor'])->name('instructor');
+
+/* wishlist controller  */
+
+Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist']);
 
 
 /*
@@ -106,6 +111,13 @@ Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user
     Route::post('/profile/store', [UserProfileController::class, 'store'])->name('profile.store');
     Route::get('/setting', [UserProfileController::class, 'setting'])->name('setting');
     Route::post('/password/setting', [UserProfileController::class, 'passwordSetting'])->name('passwordSetting');
+
+    /* Wishlist controller */
+
+    Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::get('/wishlist-data', [WishlistController::class, 'getWishlist']);
+    Route::delete('/wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+
 
 });
 
