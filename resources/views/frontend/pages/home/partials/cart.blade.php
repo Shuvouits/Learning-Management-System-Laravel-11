@@ -4,6 +4,8 @@
             <i class="la la-shopping-cart"></i>
             <span class="product-count">{{ count($cart) }}</span>
         </p>
+
+        @if($cart->count() > 0)
         <ul class="cart-dropdown-menu">
             @foreach($cart as $item)
                 <li class="media media-card">
@@ -25,6 +27,7 @@
                 </li>
             @endforeach
         </ul>
+        @endif
     </li>
 </ul>
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\AdminCourseController;
 use App\Http\Controllers\admin\AdminInstructorController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SubcategoryController;
@@ -57,6 +58,7 @@ Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login
 
 
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::post('/logout', [AdminController::class, 'destroy'])
     ->name('logout');
@@ -78,10 +80,10 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::post('/update-status', [AdminInstructorController::class, 'updateStatus'])->name('instructor.status');
     Route::get('/instructor-active-list', [AdminInstructorController::class, 'instructorActive'])->name('instructor.active');
 
+    /* control Course  */
 
-
-
-
+    Route::resource('course', AdminCourseController::class);
+    Route::post('/course-status', [AdminCourseController::class, 'courseStatus'])->name('course.status');
 
 
 });

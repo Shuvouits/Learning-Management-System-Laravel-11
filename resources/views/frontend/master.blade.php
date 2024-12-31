@@ -28,7 +28,7 @@
 
 <body>
 
-
+    @include('frontend.section.preloader')
 
     <!--======================================
         START HEADER AREA

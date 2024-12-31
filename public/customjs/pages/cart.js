@@ -2,9 +2,9 @@
 $(document).ready(function () {
 
     // Call the function to get the cart data
-    getCart();
+    fetchCart();
 
-    function getCart() {
+    function fetchCart() {
 
         var url = '/fetch/cart';
 
@@ -67,7 +67,7 @@ $(document).ready(function () {
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    getCart(); // Refresh the cart
+                    fetchCart(); // Refresh the cart
 
                 } else {
                     alert(response.message || 'Failed to remove course');

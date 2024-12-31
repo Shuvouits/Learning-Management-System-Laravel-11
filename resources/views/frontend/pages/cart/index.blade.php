@@ -15,5 +15,5 @@
 
 @push('scripts')
 
-    <script src="{{asset('customjs/pages/cart.js')}}"></script>
+    <script src="{{asset('customjs/cart/index.js')}}"></script>
 @endpush
