@@ -43,14 +43,22 @@ $category = getCategories();
                             </button>
                         </div>
 
-                        @if(!auth()->user())
-                        <ul
-                            class="generic-list-item d-flex flex-wrap align-items-center fs-14 border-left border-left-gray pl-3 ml-3">
-                            <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i
-                                    class="la la-sign-in mr-1"></i><a href="{{route('login')}}" target="_blank"> Login</a></li>
-                            <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a
-                                    href="sign-up.html"> Register</a></li>
-                        </ul>
+                        @if (!auth()->user())
+                            <ul
+                                class="generic-list-item d-flex flex-wrap align-items-center fs-14 border-left border-left-gray pl-3 ml-3">
+                                <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i
+                                        class="la la-sign-in mr-1"></i><a href="{{ route('login') }}"> Login</a></li>
+                                <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a
+                                        href="sign-up.html"> Register</a></li>
+                            </ul>
+                        @else
+                            <ul
+                                class="generic-list-item d-flex flex-wrap align-items-center fs-14 border-left border-left-gray pl-3 ml-3">
+                                <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i
+                                        class="la la-sign-in mr-1"></i><a
+                                        href="{{ route('user.dashboard') }}">Dashboard</a></li>
+
+                            </ul>
                         @endif
                     </div><!-- end header-widget -->
                 </div><!-- end col-lg-6 -->
@@ -64,7 +72,8 @@ $category = getCategories();
                 <div class="row align-items-center">
                     <div class="col-lg-2">
                         <div class="logo-box">
-                            <a href="/" class="logo"><img src="{{asset('frontend/images/logo.png')}}" alt="logo"></a>
+                            <a href="/" class="logo"><img src="{{ asset('frontend/images/logo.png') }}"
+                                    alt="logo"></a>
                             <div class="user-btn-action">
                                 <div class="search-menu-toggle icon-element icon-element-sm shadow-sm mr-2"
                                     data-toggle="tooltip" data-placement="top" title="Search">
@@ -89,21 +98,22 @@ $category = getCategories();
                                         <a href="#">Categories <i class="la la-angle-down fs-12"></i></a>
                                         <ul class="cat-dropdown-menu">
 
-                                            @foreach($category as $item)
-                                            <li>
-                                                <a href="{{route('course-category', $item->slug)}}">{{$item->name}} <i
-                                                        class="la la-angle-right"></i></a>
-                                                <ul class="sub-menu">
-                                                    @foreach($item['subcategory'] as $data)
-                                                    <li>
-                                                        <a href="{{ route('course-subcategory', ['category' => $item->slug, 'subcategory' => $data->slug]) }}">
-                                                            {{ $data->name }}
-                                                        </a>
-                                                    </li>
-                                                    @endforeach
+                                            @foreach ($category as $item)
+                                                <li>
+                                                    <a href="{{ route('course-category', $item->slug) }}">{{ $item->name }}
+                                                        <i class="la la-angle-right"></i></a>
+                                                    <ul class="sub-menu">
+                                                        @foreach ($item['subcategory'] as $data)
+                                                            <li>
+                                                                <a
+                                                                    href="{{ route('course-subcategory', ['category' => $item->slug, 'subcategory' => $data->slug]) }}">
+                                                                    {{ $data->name }}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
 
-                                                </ul>
-                                            </li>
+                                                    </ul>
+                                                </li>
                                             @endforeach
 
                                         </ul>
@@ -128,7 +138,7 @@ $category = getCategories();
 
                                     </li>
                                     <li>
-                                        <a href="#">Student</a>
+                                        <a href="{{route('cart')}}">Cart</a>
 
                                     </li>
 
@@ -144,102 +154,45 @@ $category = getCategories();
                                     <li>
                                         <p class="shop-cart-btn d-flex align-items-center">
 
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-                                              </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                                <path
+                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                            </svg>
 
-                                            <span class="product-count" style="margin-left: 5px">2</span>
+                                            <?php
+                                            if (auth()->check()) {
+                                                $user_id = auth()->user()->id; // Get the authenticated user's ID
+                                                $wishlist = getWishlist(); // Get wishlist data
+                                                $wishlist_count = \App\Models\Wishlist::where('user_id', $user_id)->count(); // Count wishlist items
+                                            } else {
+                                                // Handle the case when the user is not logged in
+                                                $wishlist = collect(); // Empty collection if not logged in
+                                                $wishlist_count = 0; // No wishlist count if not logged in
+                                            }
+                                            ?>
+
+
+                                            <span class="product-count" id="wishlist-count"
+                                                style="margin-left: 5px">{{ $wishlist_count }}</span>
 
                                         </p>
-                                        <ul class="cart-dropdown-menu">
-                                            <li class="media media-card">
-                                                <a href="shopping-cart.html" class="media-img">
-                                                    <img src="images/small-img.jpg" alt="Cart image">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h5><a href="course-details.html">The Complete JavaScript
-                                                            Course 2021: From Zero to Expert!</a></h5>
-                                                    <span class="d-block lh-18 py-1">Kamran Ahmed</span>
-                                                    <p class="text-black font-weight-semi-bold lh-18">$12.99 <span
-                                                            class="before-price fs-14">$129.99</span></p>
-                                                </div>
-                                            </li>
-                                            <li class="media media-card">
-                                                <a href="shopping-cart.html" class="media-img">
-                                                    <img src="images/small-img.jpg" alt="Cart image">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h5><a href="course-details.html">The Complete JavaScript
-                                                            Course 2021: From Zero to Expert!</a></h5>
-                                                    <span class="d-block lh-18 py-1">Kamran Ahmed</span>
-                                                    <p class="text-black font-weight-semi-bold lh-18">$12.99 <span
-                                                            class="before-price fs-14">$129.99</span></p>
-                                                </div>
-                                            </li>
-                                            <li class="media media-card">
-                                                <div class="media-body fs-16">
-                                                    <p class="text-black font-weight-semi-bold lh-18">Total: <span
-                                                            class="cart-total">$12.99</span> <span
-                                                            class="before-price fs-14">$129.99</span></p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="shopping-cart.html" class="btn theme-btn w-100">Got to
-                                                    cart <i class="la la-arrow-right icon ml-1"></i></a>
-                                            </li>
-                                        </ul>
+
+                                        <div  id="wishlist-course">
+
+
+
+                                        </div>
+
+
                                     </li>
                                 </ul>
                             </div><!-- end shop-cart -->
 
 
 
-                            <div class="shop-cart mr-4">
-                                <ul>
-                                    <li>
-                                        <p class="shop-cart-btn d-flex align-items-center">
-                                            <i class="la la-shopping-cart"></i>
-                                            <span class="product-count">2</span>
-                                        </p>
-                                        <ul class="cart-dropdown-menu">
-                                            <li class="media media-card">
-                                                <a href="shopping-cart.html" class="media-img">
-                                                    <img src="images/small-img.jpg" alt="Cart image">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h5><a href="course-details.html">The Complete JavaScript
-                                                            Course 2021: From Zero to Expert!</a></h5>
-                                                    <span class="d-block lh-18 py-1">Kamran Ahmed</span>
-                                                    <p class="text-black font-weight-semi-bold lh-18">$12.99 <span
-                                                            class="before-price fs-14">$129.99</span></p>
-                                                </div>
-                                            </li>
-                                            <li class="media media-card">
-                                                <a href="shopping-cart.html" class="media-img">
-                                                    <img src="images/small-img.jpg" alt="Cart image">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h5><a href="course-details.html">The Complete JavaScript
-                                                            Course 2021: From Zero to Expert!</a></h5>
-                                                    <span class="d-block lh-18 py-1">Kamran Ahmed</span>
-                                                    <p class="text-black font-weight-semi-bold lh-18">$12.99 <span
-                                                            class="before-price fs-14">$129.99</span></p>
-                                                </div>
-                                            </li>
-                                            <li class="media media-card">
-                                                <div class="media-body fs-16">
-                                                    <p class="text-black font-weight-semi-bold lh-18">Total: <span
-                                                            class="cart-total">$12.99</span> <span
-                                                            class="before-price fs-14">$129.99</span></p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="shopping-cart.html" class="btn theme-btn w-100">Got to
-                                                    cart <i class="la la-arrow-right icon ml-1"></i></a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                            <div class="shop-cart mr-4" id='cart'>
+
                             </div><!-- end shop-cart -->
 
 
@@ -271,20 +224,8 @@ $category = getCategories();
 
             </li>
             <li>
-                <a href="#">courses</a>
-                <ul class="sub-menu">
-                    <li><a href="course-grid.html">course grid</a></li>
-                    <li><a href="course-list.html">course list</a></li>
-                    <li><a href="course-grid-left-sidebar.html">grid left sidebar</a></li>
-                    <li><a href="course-grid-right-sidebar.html">grid right sidebar</a></li>
-                    <li><a href="course-list-left-sidebar.html">list left sidebar <span
-                                class="ribbon ribbon-blue-bg">New</span></a></li>
-                    <li><a href="course-list-right-sidebar.html">list right sidebar <span
-                                class="ribbon ribbon-blue-bg">New</span></a></li>
-                    <li><a href="course-details.html">course details</a></li>
-                    <li><a href="lesson-details.html">lesson details</a></li>
-                    <li><a href="my-courses.html">My courses</a></li>
-                </ul>
+                <a href="{{route('cart')}}">cart</a>
+
             </li>
             <li>
                 <a href="#">Student</a>
@@ -301,8 +242,8 @@ $category = getCategories();
         </ul>
     </div><!-- end off-canvas-menu -->
     <div class="off-canvas-menu custom-scrollbar-styled category-off-canvas-menu">
-        <div class="off-canvas-menu-close cat-menu-close icon-element icon-element-sm shadow-sm"
-            data-toggle="tooltip" data-placement="left" title="Close menu">
+        <div class="off-canvas-menu-close cat-menu-close icon-element icon-element-sm shadow-sm" data-toggle="tooltip"
+            data-placement="left" title="Close menu">
             <i class="la la-times"></i>
         </div><!-- end off-canvas-menu-close -->
         <ul class="generic-list-item off-canvas-menu-list pt-90px">

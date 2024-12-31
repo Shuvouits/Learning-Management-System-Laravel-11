@@ -33,9 +33,15 @@ class WishlistRepository
                     'user_id' => $userId,
                     'course_id' => $course_id,
                 ]);
+
+                $wishlistCount = Wishlist::where('user_id', $userId)->count(); // Total wishlist count
+                $wishlist_course = Wishlist::where('user_id', $userId)->with('course', 'course.user')->get();
+
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Wishlist added successfully'
+                    'message' => 'Wishlist added successfully',
+                    'wishlist_count' => $wishlistCount,
+                    'wishlist_course' => $wishlist_course
                 ], 200);
             }
 

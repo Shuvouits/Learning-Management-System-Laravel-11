@@ -51,7 +51,7 @@ class FrontendController extends Controller
 
         $user = User::find($id);
         $user_course = Course::where('instructor_id', $user->id)->get();
-        
+
         return view('frontend.pages.instructor.index', compact('user', 'user_course'));
 
     }

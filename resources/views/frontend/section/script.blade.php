@@ -66,5 +66,7 @@
 
 </script>
 
+
+
 @stack('scripts')
 

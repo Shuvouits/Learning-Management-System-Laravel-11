@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\AdminInstructorController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SubcategoryController;
 use App\Http\Controllers\backend\ProfileController;
+use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\frontend\WishlistController;
 use App\Http\Controllers\instructor\CourseController;
@@ -29,7 +30,16 @@ Route::get('/instructor/{name}/{id}', [FrontendController::class, 'instructor'])
 
 /* wishlist controller  */
 
+Route::get('/wishlist/all', [WishlistController::class, 'allWishlist']);
+
 Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist']);
+
+/* Cart Controller */
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart/all', [CartController::class, 'cartAll']);
+Route::get('/fetch/cart', [CartController::class, 'fetchCart']);
+Route::post('/remove/cart', [CartController::class, 'removeCart']);
 
 
 /*

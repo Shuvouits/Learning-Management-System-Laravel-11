@@ -29,8 +29,10 @@
 
                             @foreach ($data['course'] as $course)
                                 <div class="col-lg-4 responsive-column-half">
+
                                     <div class="card card-item card-preview"
                                         data-tooltip-content="#{{ $course->course_name_slug }}">
+
                                         <div class="card-image">
                                             <a href="course-details.html" class="d-block">
                                                 <img class="card-img-top lazy" src="{{ asset($course->course_image) }}"
@@ -50,10 +52,14 @@
                                                     -{{ round((($course->selling_price - $course->discount_price) / $course->selling_price) * 100) }}%
                                                 </div>
                                             </div>
-                                        </div><!-- end card-image -->
+
+                                        </div> <!-- end card-image -->
+
                                         <div class="card-body">
                                             <h6 class="ribbon ribbon-blue-bg fs-14 mb-3"
-                                                style="text-transform:capitalize">{{ $course->label }}</h6>
+                                                style="text-transform:capitalize">{{ $course->label }}
+                                            </h6>
+
                                             <h5 class="card-title"><a
                                                     href="{{ route('course-details', $course->course_name_slug) }}">{{ $course->course_name }}</a>
                                             </h5>
@@ -64,7 +70,6 @@
                                                     {{ $course['user']['name'] }}
                                                 </a>
                                             </p>
-
 
                                             <div class="rating-wrap d-flex align-items-center py-2">
                                                 <div class="review-stars">
@@ -77,23 +82,44 @@
                                                 </div>
                                                 <span class="rating-total pl-1">(20,230)</span>
                                             </div><!-- end rating-wrap -->
+
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <p class="card-price text-black font-weight-bold">
                                                     ${{ $course->discount_price }} <span
                                                         class="before-price font-weight-medium">{{ $course->selling_price }}</span>
                                                 </p>
 
-
-
                                                 <div class="icon-element icon-element-sm shadow-sm cursor-pointer wishlist-icon"
                                                     title="Add to Wishlist" data-course-id="{{ $course->id }}">
-                                                    <i class="la la-heart-o"></i>
+
+                                                    <?php
+                                                    // Check if the user is authenticated
+                                                    if (auth()->check()) {
+                                                        $user_id = auth()->user()->id;
+
+                                                        // Check if the course is in the wishlist
+                                                        $isWishlisted = \App\Models\Wishlist::where('user_id', $user_id)->where('course_id', $course->id)->first();
+                                                    } else {
+                                                        $isWishlisted = null; // Default value for non-authenticated users
+                                                    }
+                                                    ?>
+
+                                                    @if ($isWishlisted)
+                                                        <i class="la la-heart"></i>
+                                                    @else
+                                                        <i class="la la-heart-o"></i>
+                                                    @endif
+
+
+
                                                 </div>
 
-
                                             </div>
-                                        </div><!-- end card-body -->
-                                    </div><!-- end card -->
+
+                                        </div>
+
+                                    </div>
+
                                 </div><!-- end col-lg-4 -->
                             @endforeach
 
@@ -114,49 +140,5 @@
 <!-- end courses-area -->
 
 @push('scripts')
-<script>
-    $(document).on('click', '.wishlist-icon', function () {
-        var courseId = $(this).data('course-id');
-        var url = '/wishlist/add';
-
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: {
-                course_id: courseId,
-                _token: $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (response) {
-                Swal.fire({
-                    icon: response.status === 'success' ? 'success' : 'error',
-                    title: response.message,
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true
-                });
-            },
-            error: function (xhr) {
-                let message = 'Something went wrong!';
-                if (xhr.responseJSON && xhr.responseJSON.message) {
-                    message = xhr.responseJSON.message;
-                }
-
-                Swal.fire({
-                    icon: 'error',
-                    title: message,
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true
-                });
-            }
-        });
-    });
-</script>
+    <script src="{{ asset('customjs/wishlist/index.js') }}"></script>
 @endpush
-
-
-

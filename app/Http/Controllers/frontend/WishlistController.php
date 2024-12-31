@@ -37,10 +37,21 @@ class WishlistController extends Controller
     {
         $wishlist = Wishlist::find($id);
         if ($wishlist) {
+
             $wishlist->delete();
-            return response()->json(['status' => 'success', 'message' => 'Wishlist item deleted successfully.']);
+            $userId = Auth::user()->id;
+            $wishlistCount = Wishlist::where('user_id', $userId)->count(); // Total wishlist count
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Wishlist item deleted successfully.',
+                'wishlist_count' => $wishlistCount
+            ]);
         }
-        return response()->json(['status' => 'error', 'message' => 'Wishlist item not found.']);
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Wishlist item not found.'
+        ]);
     }
 
 
@@ -57,5 +68,24 @@ class WishlistController extends Controller
         $course_id = $validated_data['course_id'];
 
         return $this->wishlistService->createWishlist($course_id);
+    }
+
+
+    public function allWishlist()
+    {
+
+        // Use the global helper to check authentication
+        $authResponse = auth_check_json();
+        if ($authResponse) {
+            return $authResponse; // Return error response if not authenticated
+        }
+
+        $user_id = Auth::user()->id;
+        $wishlistItems = Wishlist::where('user_id', $user_id)->with('course', 'course.user')->get();
+        $html = view('frontend.pages.home.partials.wishlist', compact('wishlistItems'))->render();
+        return response()->json([
+            'status' => 'success',
+            'html' => $html,
+        ]);
     }
 }

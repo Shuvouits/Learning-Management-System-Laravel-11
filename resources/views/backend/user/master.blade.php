@@ -17,6 +17,8 @@
     <!-- Favicon -->
     <link rel="icon" sizes="16x16" href="{{ asset('frontend/images/favicon.png') }}">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
      @include('backend.user.section.link')
 
     <!-- end inject -->
@@ -45,7 +47,7 @@
                 <i class="la la-times"></i>
             </div><!-- end off-canvas-menu-close -->
             <div class="logo-box px-4">
-                <a href="index.html" class="logo"><img src="{{ asset('frontend/images/logo.png') }}"
+                <a href="/" target="_blank" class="logo"><img src="{{ asset('frontend/images/logo.png') }}"
                         alt="logo"></a>
             </div>
 
