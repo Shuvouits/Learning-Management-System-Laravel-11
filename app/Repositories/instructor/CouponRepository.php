@@ -4,6 +4,7 @@
 namespace App\Repositories\instructor;
 
 use App\Models\Coupon;
+use Illuminate\Support\Facades\Auth;
 
 class CouponRepository
 {
@@ -12,6 +13,7 @@ class CouponRepository
 
     public function saveCoupon($data)
     {
+        $data['instructor_id'] = Auth::user()->id;
 
         return Coupon::create($data);
 

@@ -31,7 +31,7 @@ class CourseRequest extends FormRequest
             'course_name' => 'required|string',
             'course_name_slug' => "nullable|string|unique:courses,course_name_slug,{$courseId}", // Update conditionally
             'description' => 'required|string',
-            'video' => 'nullable|mimes:mp4,mkv,avi|max:51200', // Max 50MB
+            'video' => 'nullable|mimes:mp4,mkv,avi', // Max 50MB
             'label' => 'nullable|string|max:100',
             'duration' => 'nullable|string|max:50',
             'resources' => 'nullable|string|max:255',

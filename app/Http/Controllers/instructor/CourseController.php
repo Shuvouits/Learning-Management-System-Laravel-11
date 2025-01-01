@@ -8,8 +8,10 @@ use App\Models\Category;
 use App\Models\Course;
 use App\Models\CourseGoal;
 use App\Models\SubCategory;
+use App\Models\User;
 use App\Services\instructor\CourseService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -24,7 +26,8 @@ class CourseController extends Controller
 
     public function index()
     {
-        $all_courses = Course::with('category', 'subCategory')->latest()->get();
+        $instructor_id = Auth::user()->id;
+        $all_courses = Course::where('instructor_id', $instructor_id)->with('category', 'subCategory')->latest()->get();
         return view('backend.instructor.course.index', compact('all_courses'));
     }
 

@@ -141,7 +141,8 @@ Route::get('/cart/all', [CartController::class, 'cartAll']);
 Route::get('/fetch/cart', [CartController::class, 'fetchCart']);
 Route::post('/remove/cart', [CartController::class, 'removeCart']);
 
-
+/* Coupon Apply    */
+Route::post('/apply-coupon', [CouponController::class, 'applyCoupon']);
 
 
 /*

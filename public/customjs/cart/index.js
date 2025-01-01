@@ -1,5 +1,6 @@
 
 
+
 $(document).ready(function () {
     getCart();
 });
@@ -174,7 +175,7 @@ $(document).ready(function () {
 
                     getCart();  //Refresh getCart
 
-                } 
+                }
             },
             error: function(xhr) {
                 let message = 'Something went wrong!';
@@ -190,4 +191,15 @@ $(document).ready(function () {
     })
 
 
+
+
+
+
 });
+
+
+
+
+
+
+
