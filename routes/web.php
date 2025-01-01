@@ -9,6 +9,7 @@ use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\frontend\WishlistController;
+use App\Http\Controllers\instructor\CouponController;
 use App\Http\Controllers\instructor\CourseController;
 use App\Http\Controllers\instructor\CourseSectionController;
 use App\Http\Controllers\instructor\InstructorController;
@@ -20,27 +21,6 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', [FrontendController::class, 'index']);
-
-Route::get('/course-details/{slug}', [FrontendController::class, 'view'])->name('course-details');
-Route::get('/category/{slug}', [FrontendController::class, 'courseCategory'])->name('course-category');
-Route::get('/course/{category}/{subcategory}', [FrontendController::class, 'courseSubcategory'])->name('course-subcategory');
-Route::get('/all-category', [FrontendController::class, 'allCategory'])->name('all-category');
-
-Route::get('/instructor/{name}/{id}', [FrontendController::class, 'instructor'])->name('instructor');
-
-/* wishlist controller  */
-
-Route::get('/wishlist/all', [WishlistController::class, 'allWishlist']);
-
-Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist']);
-
-/* Cart Controller */
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
-Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-Route::get('/cart/all', [CartController::class, 'cartAll']);
-Route::get('/fetch/cart', [CartController::class, 'fetchCart']);
-Route::post('/remove/cart', [CartController::class, 'removeCart']);
 
 
 /*
@@ -112,6 +92,8 @@ Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')
 
    // Route::get('/course-section/{id}', [CourseSectionController::class, 'index'])->name('course-section');
 
+   Route::resource('coupon', CouponController::class);
+
 });
 
 Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user.')->group(function () {
@@ -132,6 +114,34 @@ Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user
 
 
 });
+
+
+/*  All Frontend Route */
+
+
+Route::get('/', [FrontendController::class, 'index']);
+
+Route::get('/course-details/{slug}', [FrontendController::class, 'view'])->name('course-details');
+Route::get('/category/{slug}', [FrontendController::class, 'courseCategory'])->name('course-category');
+Route::get('/course/{category}/{subcategory}', [FrontendController::class, 'courseSubcategory'])->name('course-subcategory');
+Route::get('/all-category', [FrontendController::class, 'allCategory'])->name('all-category');
+
+Route::get('/instructor/{name}/{id}', [FrontendController::class, 'instructor'])->name('instructor');
+
+/* wishlist controller  */
+
+Route::get('/wishlist/all', [WishlistController::class, 'allWishlist']);
+
+Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist']);
+
+/* Cart Controller */
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart/all', [CartController::class, 'cartAll']);
+Route::get('/fetch/cart', [CartController::class, 'fetchCart']);
+Route::post('/remove/cart', [CartController::class, 'removeCart']);
+
+
 
 
 /*
