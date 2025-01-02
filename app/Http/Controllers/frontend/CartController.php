@@ -66,7 +66,13 @@ class CartController extends Controller
 
         $cart =  $this->cartService->viewCart($request);
 
-        $html = view('frontend.pages.home.partials.cart', compact('cart'))->render();
+         // Total Amount (discounted বা selling price) হিসাব করা
+         $subTotal = $cart->sum(function ($cartItem) {
+            $price = $cartItem->course->discount_price ?? $cartItem->course->selling_price;
+            return $cartItem->quantity * ($price ?? 0);
+        });
+
+        $html = view('frontend.pages.home.partials.cart', compact('cart', 'subTotal'))->render();
 
         return response()->json([
             'status' => 'success',

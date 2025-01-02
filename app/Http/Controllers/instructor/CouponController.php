@@ -3,20 +3,23 @@
 namespace App\Http\Controllers\instructor;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ApplyCouponRequest;
 use App\Http\Requests\CouponRequest;
 use App\Models\Cart;
 use App\Models\Coupon;
+use App\Services\ApplyCouponService;
 use App\Services\instructor\CouponService;
 use Illuminate\Http\Request;
 
 class CouponController extends Controller
 {
 
-    protected $couponService;
+    protected $couponService, $applyCouponService;
 
-    public function __construct(CouponService $couponService)
+    public function __construct(CouponService $couponService, ApplyCouponService $applyCouponService)
     {
         $this->couponService = $couponService;
+        $this->applyCouponService = $applyCouponService;
     }
 
 
@@ -79,57 +82,43 @@ class CouponController extends Controller
         //
     }
 
-    public function applyCoupon(Request $request)
+    public function applyCoupon(ApplyCouponRequest $request)
     {
 
         // Validate the input
-        $validated = $request->validate([
-            'coupon' => 'required|string|exists:coupons,coupon_name',
-            'course_id' => 'required|array',
-            'course_id.*' => 'exists:courses,id', // Validate each course_id
-            'instructor_id' => 'required|array',
-            'instructor_id.*' => 'exists:users,id', // Validate each instructor_id
-        ]);
+        $validated = $request->validated();
 
         $couponName = $validated['coupon'];
         $courseIds = $validated['course_id'];
         $instructorIds = $validated['instructor_id'];
 
-        // Initialize response data
-        $discounts = [];
+        $discounts =  $this->applyCouponService->applyCoupon($couponName, $courseIds, $instructorIds);
 
-        foreach ($courseIds as $key => $courseId) {
-            $instructorId = $instructorIds[$key];
-
-            // Check coupon validity for each course and instructor
-            $coupon = Coupon::where('coupon_name', $couponName)
-                ->where('instructor_id', $instructorId)
-                ->where('status', 1) // Active coupon
-                ->first();
-
-            if ($coupon) {
-                $discounts[] = [
-                    'course_id' => $courseId,
-                    'instructor_id' => $instructorId,
-                    'discount' => $coupon->coupon_discount,
-                    'validity' => $coupon->coupon_validity,
-                ];
-            }
-        }
-
-        // If no valid coupon found
-        if (empty($discounts)) {
+         // If no valid coupon found
+         if (empty($discounts)) {
             return response()->json([
                 'success' => false,
                 'message' => 'No valid coupon found for the selected courses.',
             ], 400);
         }
 
-        // Success response
-        return response()->json([
+         // Calculate total discount
+         $totalDiscount = collect($discounts)->sum('discount');
+
+         // Store total discount in session
+         session(['coupon' => $totalDiscount]);
+
+
+         // Success response
+         return response()->json([
             'success' => true,
             'message' => 'Coupon applied successfully!',
             'discounts' => $discounts,
         ]);
+
+
+
+
+
     }
 }

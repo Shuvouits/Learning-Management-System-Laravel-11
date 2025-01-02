@@ -58,7 +58,7 @@
                 <div class="input-box col-lg-6">
                     <label class="label-text">Email Address</label>
                     <div class="form-group">
-                        <input class="form-control form--control" placeholder="Enter your email" type="email" name="email" value="{{ old('first_name', auth()->user()->email) }}" >
+                        <input class="form-control form--control" placeholder="Enter your email" type="email" name="email" value="{{ old('email', auth()->user()->email) }}" >
                         <span class="la la-envelope input-icon"></span>
                     </div>
                 </div><!-- end input-box -->
@@ -66,8 +66,17 @@
                 <div class="input-box col-lg-12">
                     <label class="label-text">Phone Number</label>
                     <div class="form-group">
-                        <input class="form-control form--control" placeholder="Enter your phone number" type="text" name="phone" value="{{ old('first_name', auth()->user()->phone) }}" >
+                        <input class="form-control form--control" placeholder="Enter your phone number" type="text" name="phone" value="{{ old('phone', auth()->user()->phone) }}" >
                         <span class="la la-phone input-icon"></span>
+                    </div>
+                </div><!-- end input-box -->
+
+                <div class="input-box col-lg-12">
+                    <label class="label-text">Address</label>
+                    <div class="form-group">
+                        <input class="form-control form--control" placeholder="Enter your address" type="text" name="address" value="{{ old('address', auth()->user()->address) }}" >
+                        <span class="la la-map-marker input-icon"></span>
+
                     </div>
                 </div><!-- end input-box -->
 

@@ -7,7 +7,9 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SubcategoryController;
 use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\frontend\CartController;
+use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\FrontendController;
+use App\Http\Controllers\frontend\OrderController;
 use App\Http\Controllers\frontend\WishlistController;
 use App\Http\Controllers\instructor\CouponController;
 use App\Http\Controllers\instructor\CourseController;
@@ -143,6 +145,15 @@ Route::post('/remove/cart', [CartController::class, 'removeCart']);
 
 /* Coupon Apply    */
 Route::post('/apply-coupon', [CouponController::class, 'applyCoupon']);
+
+/*  Checkout */
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+
+/* Order  */
+Route::post('/order', [OrderController::class, 'order'])->name('order');
+
+Route::get('/payment-success', [OrderController::class, 'success'])->name('success');
+Route::get('/payment-cancel', [OrderController::class, 'cancel'])->name('cancel');
 
 
 /*

@@ -149,6 +149,9 @@ $category = getCategories();
                                 </ul><!-- end ul -->
                             </nav><!-- end main-menu -->
 
+
+                            <!-----wishlist start--->
+
                             <div class="shop-cart mr-4">
                                 <ul>
                                     <li>
@@ -187,7 +190,7 @@ $category = getCategories();
 
                                     </li>
                                 </ul>
-                            </div><!-- end shop-cart -->
+                            </div><!-- end wishlist -->
 
 
 
