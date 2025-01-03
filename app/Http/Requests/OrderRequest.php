@@ -29,10 +29,13 @@ class OrderRequest extends FormRequest
             'address' => 'required|string',
             'payment_type' => 'required|string',
             'course_id' => 'required|array',
+            'instructor_id' => 'required|array',
+            'course_name' => 'required|array',
             'course_name' => 'required|array',
             'course_image' => 'required|array',
             'course_price' => 'required|array',
             'total_price' => 'required|numeric',
+
         ];
     }
 }

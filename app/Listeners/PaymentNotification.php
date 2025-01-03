@@ -24,7 +24,7 @@ class PaymentNotification
      */
     public function handle(PaymentSuccessful $event): void
     {
-        Log::debug('Payment Listener Data:', $event->payment);
+        
         try {
             Mail::to($event->payment['email'])->queue(new PaymentConfirmationMail($event->payment));
 

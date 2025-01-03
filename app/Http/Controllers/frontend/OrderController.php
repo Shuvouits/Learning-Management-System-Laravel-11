@@ -6,6 +6,7 @@ use App\Events\PaymentSuccessful;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Payment;
 use App\Services\PaymentService;
 use Illuminate\Http\Request;
@@ -28,8 +29,6 @@ class OrderController extends Controller
     {
 
         session()->put('stripe_data', $request->validated());
-
-
         // Call the service to process the payment
         return $this->paymentService->processPayment($request->validated());
     }
@@ -53,7 +52,7 @@ class OrderController extends Controller
                 'amount' => $session->amount_total,
             ];
 
-        
+
 
             // Dispatch event
             PaymentSuccessful::dispatch($paymentData);
@@ -68,12 +67,12 @@ class OrderController extends Controller
             Cart::where('guest_token', $guestToken)->delete();
 
             //coupon session destroy
-            session()->forget('coupon');
+            session()->forget('coupon','stripe_data');
 
             return redirect('/')->with('success', 'Course purchase successfully');
 
 
-           // return view('frontend.pages.checkout.stripe.success', ['session' => $session]);
+            // return view('frontend.pages.checkout.stripe.success', ['session' => $session]);
         } catch (\Exception $e) {
 
             return back()->withErrors(['error' => $e->getMessage()]);
@@ -91,13 +90,13 @@ class OrderController extends Controller
     {
 
         // Create payment record using metadata from Stripe
-        Payment::create([
+        $payment = Payment::create([
             'transaction_id' => $paymentIntent->id,
             'name' => $session->customer_details->name, // Use customer details for name
             'email' => $session->customer_email, // Customer's email from session
 
-            'phone' => $session->customer_details->phone ?? null, // Customer's phone from customer_details
-            'address' => json_encode($session->customer_details->address), // Customer's address from customer_details, encoded as JSON if needed
+            // 'phone' => $session->customer_phone, // Customer's phone from customer_details
+            //'address' => $session->customer_address, // Customer's address from customer_details, encoded as JSON if needed
 
 
             'total_amount' => $session->amount_total / 100, // Total price from metadata
@@ -108,5 +107,29 @@ class OrderController extends Controller
             'order_year' => now()->year,
             'status' => 'completed', // Payment status
         ]);
+
+         // Use request data for specific fields
+         $this->createOrder($payment->id);
+
     }
+
+    private function createOrder($paymentId){
+
+         // Retrieve the validated data from the session or request
+         $stripeData = session('stripe_data'); // Assuming this is where the order data is stored.
+         // Create order records for each course
+         foreach ($stripeData['course_id'] as $index => $courseId) {
+             Order::create([
+                 'payment_id' => $paymentId, // Associate with the created payment record
+                 'user_id' => auth()->user()->id, // Assuming user is authenticated
+                 'course_id' => $courseId,
+                 'instructor_id' => $stripeData['instructor_id'][$index], // Add logic to retrieve instructor ID if needed
+                 'course_title' => $stripeData['course_name'][$index],
+                 'price' => $stripeData['course_price'][$index],
+             ]);
+         }
+
+    }
+
+
 }

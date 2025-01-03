@@ -43,7 +43,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
 
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::post('/logout', [AdminController::class, 'destroy'])
-    ->name('logout');
+        ->name('logout');
 
     /*  control Profile */
 
@@ -66,8 +66,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
 
     Route::resource('course', AdminCourseController::class);
     Route::post('/course-status', [AdminCourseController::class, 'courseStatus'])->name('course.status');
-
-
 });
 
 /*   Instructor Route  */
@@ -92,16 +90,15 @@ Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')
     Route::resource('course-section', CourseSectionController::class);
     Route::resource('lecture', LectureController::class);
 
-   // Route::get('/course-section/{id}', [CourseSectionController::class, 'index'])->name('course-section');
+    // Route::get('/course-section/{id}', [CourseSectionController::class, 'index'])->name('course-section');
 
-   Route::resource('coupon', CouponController::class);
-
+    Route::resource('coupon', CouponController::class);
 });
 
 Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user.')->group(function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::post('/logout', [UserController::class, 'destroy'])
-    ->name('logout');
+        ->name('logout');
 
     Route::get('/profile', [UserProfileController::class, 'index'])->name('profile');
     Route::post('/profile/store', [UserProfileController::class, 'store'])->name('profile.store');
@@ -113,8 +110,6 @@ Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user
     Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
     Route::get('/wishlist-data', [WishlistController::class, 'getWishlist']);
     Route::delete('/wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
-
-
 });
 
 
@@ -149,11 +144,17 @@ Route::post('/apply-coupon', [CouponController::class, 'applyCoupon']);
 /*  Checkout */
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
-/* Order  */
-Route::post('/order', [OrderController::class, 'order'])->name('order');
 
-Route::get('/payment-success', [OrderController::class, 'success'])->name('success');
-Route::get('/payment-cancel', [OrderController::class, 'cancel'])->name('cancel');
+
+Route::middleware('auth')->group(function () {
+
+    /* Order  */
+    Route::post('/order', [OrderController::class, 'order'])->name('order');
+    Route::get('/payment-success', [OrderController::class, 'success'])->name('success');
+    Route::get('/payment-cancel', [OrderController::class, 'cancel'])->name('cancel');
+
+
+});
 
 
 /*
@@ -164,4 +165,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });  */
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
