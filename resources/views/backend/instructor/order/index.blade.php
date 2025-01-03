@@ -1,4 +1,4 @@
-@extends('backend.master')
+@extends('backend.instructor.master')
 
 @section('content')
 
@@ -34,6 +34,7 @@
                                 <th>NO</th>
                                 <th>Date</th>
                                 <th>Transaction Id</th>
+
                                 <th>Amount</th>
                                 <th>Payment</th>
                                 <th>Status</th>
@@ -41,22 +42,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($all_payment as $index=>$item)
+                            @foreach($all_order as $index=>$item)
                             <tr>
                                 <td>{{$index+1}}</td>
-                                <td>{{$item->created_at}}</td>
-                                <td>{{$item->transaction_id}}</td>
+                                <td>{{$item->payment->created_at->format('F d, Y')}}</td>
+
+
+                                <td>{{$item->payment->transaction_id}}</td>
+
                                 <td>
-                                    {{$item->total_amount}}
+                                    {{$item->price}}
                                 </td>
                                 <td>
-                                    {{$item->payment_type}}
+                                    {{$item->payment->payment_type}}
                                 </td>
                                 <td>
-                                    {{$item->status}}
+                                    {{$item->payment->status}}
                                 </td>
                                 <td>
-                                    <a href="{{route('admin.order.show', $item->id)}}" class="btn btn-primary">
+                                    <a href="{{route('instructor.order.show', $item->id)}}" class="btn btn-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
                                             <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>

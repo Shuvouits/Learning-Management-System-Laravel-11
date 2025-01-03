@@ -17,6 +17,7 @@ use App\Http\Controllers\instructor\CouponController;
 use App\Http\Controllers\instructor\CourseController;
 use App\Http\Controllers\instructor\CourseSectionController;
 use App\Http\Controllers\instructor\InstructorController;
+use App\Http\Controllers\instructor\InstructorOrderController;
 use App\Http\Controllers\instructor\InstructorProfileController;
 use App\Http\Controllers\instructor\LectureController;
 use App\Http\Controllers\user\UserController;
@@ -103,6 +104,10 @@ Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')
     // Route::get('/course-section/{id}', [CourseSectionController::class, 'index'])->name('course-section');
 
     Route::resource('coupon', CouponController::class);
+
+    /*  order  */
+    Route::resource('order', InstructorOrderController::class);
+
 });
 
 Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user.')->group(function () {

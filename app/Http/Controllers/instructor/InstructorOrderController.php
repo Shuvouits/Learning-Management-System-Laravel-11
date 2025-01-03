@@ -1,22 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\instructor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class BackendOrderController extends Controller
+class InstructorOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $all_payment = Payment::latest()->get();
-        return view('backend.admin.order.index', compact('all_payment'));
+        $instructor_id = Auth::user()->id;
+        $all_order = Order::where('instructor_id', $instructor_id)->with('payment')->get();
+        return view('backend.instructor.order.index', compact('all_order'));
     }
 
     /**
@@ -40,9 +42,9 @@ class BackendOrderController extends Controller
      */
     public function show(string $id)
     {
-        $payment_info = Payment::where('id', $id)->with('order','order.user', 'order.instructor', 'order.course')->first();
-        $user_info = User::where('email', $payment_info->email)->first();
-        return view('backend.admin.order.view', compact('payment_info','user_info'));
+        $order_info = Order::where('id', $id)->with('course','user', 'instructor', 'payment')->first();
+
+        return view('backend.instructor.order.show', compact('order_info'));
     }
 
     /**
