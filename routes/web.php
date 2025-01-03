@@ -107,6 +107,7 @@ Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')
 
     /*  order  */
     Route::resource('order', InstructorOrderController::class);
+    Route::get('/invoice/{id}', [InstructorOrderController::class, 'invoice'])->name('order.invoice');
 
 });
 
