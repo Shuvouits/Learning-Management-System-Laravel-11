@@ -3,7 +3,9 @@
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\AdminCourseController;
 use App\Http\Controllers\admin\AdminInstructorController;
+use App\Http\Controllers\admin\BackendOrderController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\SubcategoryController;
 use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\frontend\CartController;
@@ -66,6 +68,14 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
 
     Route::resource('course', AdminCourseController::class);
     Route::post('/course-status', [AdminCourseController::class, 'courseStatus'])->name('course.status');
+
+    /*  order controller  */
+    Route::resource('order', BackendOrderController::class);
+
+    /*  Setting Controller */
+    Route::get('/mail-setting', [SettingController::class, 'mailSetting'])->name('mailSetting');
+    Route::post('/mail-settings/update', [SettingController::class, 'updateMailSettings'])->name('mail.settings.update');
+
 });
 
 /*   Instructor Route  */

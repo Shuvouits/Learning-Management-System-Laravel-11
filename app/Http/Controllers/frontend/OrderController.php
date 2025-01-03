@@ -28,6 +28,9 @@ class OrderController extends Controller
     public function order(OrderRequest $request)
     {
 
+        
+
+
         session()->put('stripe_data', $request->validated());
         // Call the service to process the payment
         return $this->paymentService->processPayment($request->validated());
@@ -46,13 +49,9 @@ class OrderController extends Controller
 
             /*Event start */
 
-            $paymentData = [
-                'customer_name' => $session->customer_details->name,
-                'email' => $session->customer_details->email,
-                'amount' => $session->amount_total,
-            ];
+            $stripe_data = session()->get('stripe_data');
 
-
+            $paymentData = $stripe_data;
 
             // Dispatch event
             PaymentSuccessful::dispatch($paymentData);

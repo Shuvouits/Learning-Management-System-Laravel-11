@@ -24,9 +24,13 @@ class PaymentNotification
      */
     public function handle(PaymentSuccessful $event): void
     {
-        
+
         try {
+             // Retrieve the session data
+            //$stripe_data = session()->get('stripe_data');
             Mail::to($event->payment['email'])->queue(new PaymentConfirmationMail($event->payment));
+            // Send the mail with session data
+           // Mail::to($event->payment['email'])->queue(new PaymentConfirmationMail($stripe_data));
 
         } catch (\Exception $e) {
             Log::error('Failed to send email:', ['error' => $e->getMessage()]);

@@ -60,7 +60,35 @@
             <ul>
                 <li> <a href="{{route('admin.course.index')}}"><i class='bx bx-radio-circle'></i>All Courses</a>
                 </li>
-                
+
+
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Manage Order</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('admin.order.index')}}"><i class='bx bx-radio-circle'></i>All Orders</a>
+                </li>
+
+
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Manage Setting</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('admin.mailSetting')}}"><i class='bx bx-radio-circle'></i>Mail Setting</a>
+                </li>
+
 
             </ul>
         </li>
