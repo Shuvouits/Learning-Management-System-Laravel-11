@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\AdminCourseController;
 use App\Http\Controllers\admin\AdminInstructorController;
 use App\Http\Controllers\admin\BackendOrderController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\SubcategoryController;
 use App\Http\Controllers\backend\ProfileController;
@@ -78,6 +79,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     /*  Setting Controller */
     Route::get('/mail-setting', [SettingController::class, 'mailSetting'])->name('mailSetting');
     Route::post('/mail-settings/update', [SettingController::class, 'updateMailSettings'])->name('mail.settings.update');
+
+    /* Report Settings  */
+    Route::resource('report', ReportController::class);
 
 });
 
