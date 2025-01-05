@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('video')->nullable();
             $table->string('url')->nullable();
             $table->text('content')->nullable();
+            $table->decimal('video_duration', 8, 2);
             $table->timestamps();
 
              // Add foreign key constraint

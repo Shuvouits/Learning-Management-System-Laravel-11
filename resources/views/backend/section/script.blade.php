@@ -33,13 +33,14 @@
    </script>
 
    <!---Flora editor--->
-   <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
-<script>
-    // Initialize Froala Editor with a fixed height
-    new FroalaEditor('.editor', {
-        height: 200  // Set height to 200px
-    });
-</script>
+   <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'>
+   </script>
+   <script>
+       // Initialize Froala Editor with a fixed height
+       new FroalaEditor('.editor', {
+           height: 200 // Set height to 200px
+       });
+   </script>
 
    <script>
        $(document).ready(function() {
@@ -91,24 +92,29 @@
    </script>
 
 
-<script>
-    $(document).ready(function() {
-        $('.summernote').summernote({
-            height: 200, // Set the height of the editor
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'italic', 'underline', 'clear']],
-                ['fontname', ['fontname']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview', 'help']]
-            ]
-        });
-    });
-</script>
+   <script>
+       $(document).ready(function() {
+           $('.summernote').summernote({
+               height: 200, // Set the height of the editor
+               toolbar: [
+                   ['style', ['style']],
+                   ['font', ['bold', 'italic', 'underline', 'clear']],
+                   ['fontname', ['fontname']],
+                   ['fontsize', ['fontsize']],
+                   ['color', ['color']],
+                   ['para', ['ul', 'ol', 'paragraph']],
+                   ['table', ['table']],
+                   ['insert', ['link', 'picture', 'video']],
+                   ['view', ['fullscreen', 'codeview', 'help']]
+               ]
+           });
+       });
+   </script>
+
+   <script>
+       new PerfectScrollbar('.chat-list');
+       new PerfectScrollbar('.chat-content');
+   </script>
 
 
 

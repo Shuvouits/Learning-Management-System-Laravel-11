@@ -26,9 +26,10 @@ class LectureRequest extends FormRequest
             'course_id' => 'required|exists:courses,id', // Optional but must exist in courses table if provided
             'section_id' => 'required|exists:course_sections,id', // Required and must exist in course_sections table
             'lecture_title' => 'required|string|max:255', // Optional, must be a string, max length 255
-            'video' => 'nullable|file|mimes:mp4,mov,avi,wmv|max:102400', // Optional, must be a file of specified types, max size 100 MB
+            'video' => 'required|file|mimes:mp4,mov,avi,wmv|max:102400', // Optional, must be a file of specified types, max size 100 MB
             'url' => 'nullable|url|max:255', // Optional, must be a valid URL, max length 255
             'content' => 'required|string', // Optional, must be a string
+            'video_duration' => 'required'
 
         ];
     }

@@ -14,12 +14,37 @@
 <script src="{{ asset('frontend/js/tooltipster.bundle.min.js') }}"></script>
 <script src="{{asset('frontend/js/plyr.js')}}"></script>
 <script src="{{ asset('frontend/js/jquery.lazy.min.js') }}"></script>
+
+<script src="{{asset('frontend/js/jquery-te-1.4.0.min.js')}}"></script>
+<script src="{{asset('frontend/js/jquery.MultiFile.min.js')}}"></script>
+
 <script src="{{ asset('frontend/js/main.js') }}"></script>
 <script>
     var player = new Plyr('#player');
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    // Trigger toast when the page loads or after an event
+    @if(session('success'))
+        Swal.fire({
+            toast: true,
+            icon: 'success',
+            title: '{{ session('success') }}',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            customClass: {
+                popup: 'colored-toast' // Add a custom class for styling
+            },
+            background: '#7079e7', // Green background for success
+            color: '#ffffff', // White text color
+            iconColor: '#ffffff', // White icon color
+        });
+    @endif
+</script>
 
 <script>
     $(document).ready(function() {

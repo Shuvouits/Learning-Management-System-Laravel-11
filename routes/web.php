@@ -19,8 +19,10 @@ use App\Http\Controllers\instructor\CourseSectionController;
 use App\Http\Controllers\instructor\InstructorController;
 use App\Http\Controllers\instructor\InstructorOrderController;
 use App\Http\Controllers\instructor\InstructorProfileController;
+use App\Http\Controllers\instructor\InstructorQuestionController;
 use App\Http\Controllers\instructor\LectureController;
 use App\Http\Controllers\user\UserController;
+use App\Http\Controllers\user\UserCourseController;
 use App\Http\Controllers\user\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -109,6 +111,9 @@ Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')
     Route::resource('order', InstructorOrderController::class);
     Route::get('/invoice/{id}', [InstructorOrderController::class, 'invoice'])->name('order.invoice');
 
+    /*  Question */
+    Route::resource('question', InstructorQuestionController::class);
+
 });
 
 Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user.')->group(function () {
@@ -126,6 +131,8 @@ Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user
     Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
     Route::get('/wishlist-data', [WishlistController::class, 'getWishlist']);
     Route::delete('/wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+
+    Route::resource('course', UserCourseController::class);
 });
 
 

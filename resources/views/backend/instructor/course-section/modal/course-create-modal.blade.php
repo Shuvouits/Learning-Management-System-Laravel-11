@@ -34,6 +34,9 @@
 
                             <video id="videoPreview-{{ $data->id }}" controls style="display: none; width: 100%; margin-top: 10px;"></video>
 
+                         <!-- Hidden Input for Video Duration -->
+                        <input type="hidden" name="video_duration" id="videoDuration-{{ $data->id }}">
+
                     </div>
 
 
