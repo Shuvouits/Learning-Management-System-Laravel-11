@@ -10,6 +10,7 @@ use App\Models\Coupon;
 use App\Services\ApplyCouponService;
 use App\Services\instructor\CouponService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CouponController extends Controller
 {
@@ -25,7 +26,8 @@ class CouponController extends Controller
 
     public function index()
     {
-        $all_coupon = Coupon::latest()->get();
+        $instructor_id = Auth::user()->id;
+        $all_coupon = Coupon::where('instructor_id', $instructor_id)->latest()->get();
         return view('backend.instructor.coupon.index', compact('all_coupon'));
     }
 

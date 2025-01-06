@@ -18,19 +18,13 @@
             <div class="media-body">
                 <h5><a href="teacher-detail.html">{{ $course['user']['name'] }}</a></h5>
 
+                <div class="bio-collapsible">
+                    {!! $course['user']['bio'] !!}
 
-                <!-- Truncated Description -->
-                <div id="bioContent" class="bio-collapsible">
-                    {!! substr($course['user']['bio'], 0, 600) !!} <!-- Show first 200 characters -->
-                    <span class="bio-full-text"
-                        style="display:none;">{!! substr($course['user']['bio'], 600) !!}</span>
-                    <!-- Hidden full text -->
                 </div>
 
-                <!-- Toggle Button -->
-                <button id="toggleBio" style="color: white" class="mt-2 btn btn-danger btn-sm collapse-btn collapse--btn fs-15">
-                    Show more
-                </button>
+
+
 
 
 

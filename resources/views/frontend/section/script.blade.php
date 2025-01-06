@@ -25,7 +25,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
+<scrip>
     // Trigger toast when the page loads or after an event
     @if(session('success'))
         Swal.fire({
@@ -46,50 +46,7 @@
     @endif
 </script>
 
-<script>
-    $(document).ready(function() {
-        $('.toggleDescription').on('click', function() {
 
-            var $descriptionContent = $('#descriptionContent');
-            var $toggleButton = $(this);
-
-            // Toggle the 'expanded' class to control the height of the content
-            $descriptionContent.toggleClass('expanded');
-
-            // Change button text and icon depending on whether the content is expanded or collapsed
-            if ($descriptionContent.hasClass('expanded')) {
-                $toggleButton.html('Show less <i class="la la-angle-up ml-1 fs-14"></i>');
-            } else {
-                $toggleButton.html('Show more <i class="la la-angle-down ml-1 fs-14"></i>');
-            }
-        });
-    });
-</script>
-
-
-<script>
-    $(document).ready(function () {
-    $('#toggleBio').on('click', function () {
-        var $bioContent = $('#bioContent');
-        var $toggleButton = $(this);
-        var $fullText = $('.bio-full-text');
-
-        // Toggle the 'expanded' class to control the height of the content
-        $bioContent.toggleClass('expanded');
-
-        // Toggle full text visibility
-        $fullText.toggle();
-
-        // Change button text depending on whether the content is expanded or collapsed
-        if ($bioContent.hasClass('expanded')) {
-            $toggleButton.text('Show less');
-        } else {
-            $toggleButton.text('Show more');
-        }
-    });
-});
-
-</script>
 
 
 

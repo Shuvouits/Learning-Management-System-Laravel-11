@@ -56,12 +56,11 @@
             <div class="preview-course-incentives">
                 <h3 class="card-title fs-18 pb-2">This course includes</h3>
                 <ul class="generic-list-item pb-3">
-                    <li><i class="la la-play-circle-o mr-2 text-color"></i>2.5 hours on-demand
-                        video</li>
-                    <li><i class="la la-file mr-2 text-color"></i>34 articles</li>
-                    <li><i class="la la-file-text mr-2 text-color"></i>12 downloadable
-                        resources</li>
-                    <li><i class="la la-code mr-2 text-color"></i>51 coding exercises</li>
+                    <li><i class="la la-play-circle-o mr-2 text-color"></i>{{ number_format($total_lecture_duration / 60, 2) }} hours on-demand video</li>
+
+                    <li><i class="la la-file mr-2 text-color"></i>{{$total_lecture}} articles</li>
+
+
                     <li><i class="la la-key mr-2 text-color"></i>Full lifetime access</li>
                     <li><i class="la la-television mr-2 text-color"></i>Access on mobile and
                         TV</li>
@@ -74,7 +73,7 @@
                     </h3>
                     <p class="lh-24 pb-3">Get your team access to 3,000+ top Aduca courses
                         anytime, anywhere.</p>
-                    <a href="for-business.html"
+                    <a href="{{route('instructor.register')}}"
                         class="btn theme-btn theme-btn-sm theme-btn-transparent lh-30 w-100">Try
                         Aduca for Business</a>
                 </div>

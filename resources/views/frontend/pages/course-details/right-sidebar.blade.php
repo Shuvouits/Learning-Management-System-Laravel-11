@@ -9,7 +9,7 @@
 
        @include('frontend.pages.course-details.rightside-related-course')
 
-       @include('frontend.pages.course-details.course-tag')
+       
 
 
 

@@ -2,15 +2,11 @@
     <h3 class="fs-24 font-weight-semi-bold pb-3">Description</h3>
 
     <!-- Truncated Description -->
-    <div id="descriptionContent" class="description-collapsible">
+    <div  class="">
         {!! $course->description !!}
     </div>
 
-    <!-- Toggle Button -->
-    <button style="border: none; outline:none"
-        class="toggleDescription collapse-btn collapse--btn fs-15 px-3 py-2">
-        Show more <i class="la la-angle-down ml-1 fs-14"></i>
-    </button>
+
 </div>
 
 
@@ -21,10 +17,11 @@
         <h3 class="fs-24 font-weight-semi-bold">Course content</h3>
         <div class="curriculum-duration fs-15">
             <span class="curriculum-total__text mr-2"><strong
-                    class="text-black font-weight-semi-bold">Total:</strong> 17 lectures</span>
+                    class="text-black font-weight-semi-bold">Total:</strong> {{$total_lecture}} lectures</span>
             <span class="curriculum-total__hours"><strong
                     class="text-black font-weight-semi-bold">Total hours:</strong>
-                02:35:47</span>
+                    <span>{{ number_format($total_lecture_duration / 60, 2) }} hours</span>
+
         </div>
     </div>
 
@@ -42,7 +39,7 @@
                             <i class="la la-plus"></i>
                             <i class="la la-minus"></i>
                             {{ $item->section_title }}
-                            <span class="fs-15 text-gray font-weight-medium">6 lectures</span>
+                            <span class="fs-15 text-gray font-weight-medium">{{$item['lecture']->count()}} lectures</span>
                         </button>
                     </div><!-- end card-header -->
                     <div id="collapse-{{ $index }}"
@@ -61,7 +58,7 @@
                                                 {{ $lecture->lecture_title }}
                                                 <span class="ribbon ml-2 fs-13">Preview</span>
                                             </span>
-                                            <span>02:27</span>
+                                            <span>{{$lecture->video_duration}}</span>
                                         </a>
                                     </li>
                                 @endforeach

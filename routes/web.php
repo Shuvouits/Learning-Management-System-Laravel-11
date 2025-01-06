@@ -22,6 +22,7 @@ use App\Http\Controllers\instructor\InstructorOrderController;
 use App\Http\Controllers\instructor\InstructorProfileController;
 use App\Http\Controllers\instructor\InstructorQuestionController;
 use App\Http\Controllers\instructor\LectureController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\UserCourseController;
 use App\Http\Controllers\user\UserProfileController;
@@ -179,6 +180,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/order', [OrderController::class, 'order'])->name('order');
     Route::get('/payment-success', [OrderController::class, 'success'])->name('success');
     Route::get('/payment-cancel', [OrderController::class, 'cancel'])->name('cancel');
+    Route::resource('rating', RatingController::class);
 
 
 });

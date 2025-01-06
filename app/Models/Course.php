@@ -28,4 +28,9 @@ class Course extends Model
     public function course_section(){
         return $this->hasMany(CourseSection::class, 'course_id', 'id');
     }
+
+    public function orders()
+{
+    return $this->hasMany(Order::class, 'course_id', 'id');
+}
 }

@@ -4,30 +4,51 @@
             <div class="breadcrumb-content">
                 <ul class="generic-list-item generic-list-item-arrow d-flex flex-wrap align-items-center">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="#">{{$course['category']['name']}}</a></li>
-                    <li><a href="#">{{$course['subcategory']['name']}}</a></li>
+                    <li><a href="#">{{ $course['category']['name'] }}</a></li>
+                    <li><a href="#">{{ $course['subcategory']['name'] }}</a></li>
                 </ul>
                 <div class="section-heading">
-                    <h2 class="section__title">{{$course['course_name']}}</h2>
-                    <p class="section__desc pt-2 lh-30">{{$course['course_title']}}</p>
+                    <h2 class="section__title">{{ $course['course_name'] }}</h2>
+                    <p class="section__desc pt-2 lh-30">{{ $course['course_title'] }}</p>
                 </div><!-- end section-heading -->
                 <div class="d-flex flex-wrap align-items-center pt-3">
-                    <h6 class="ribbon ribbon-lg mr-2 bg-3 text-white" style="text-transform: capitalize">{{$course['label']}}</h6>
+                    <h6 class="ribbon ribbon-lg mr-2 bg-3 text-white" style="text-transform: capitalize">
+                        {{ $course['label'] }}</h6>
                     <div class="rating-wrap d-flex flex-wrap align-items-center">
                         <div class="review-stars">
-                            <span class="rating-number">4.4</span>
-                            <span class="la la-star"></span>
-                            <span class="la la-star"></span>
-                            <span class="la la-star"></span>
-                            <span class="la la-star"></span>
-                            <span class="la la-star-o"></span>
+
+                            <span class="rating-number">{{ number_format($averageRating, 1) }}</span>
+
+                            @php
+                                $fullStars = floor($averageRating); // পূর্ণ তারকার সংখ্যা
+                                $halfStar = $averageRating - $fullStars >= 0.5 ? 1 : 0; // অর্ধেক তারকা (যদি থাকে)
+                                $emptyStars = 5 - $fullStars - $halfStar; // খালি তারকার সংখ্যা
+                            @endphp
+
+                            {{-- পূর্ণ তারকা --}}
+                            @for ($i = 0; $i < $fullStars; $i++)
+                                <span class="la la-star"></span>
+                            @endfor
+
+                            {{-- অর্ধেক তারকা --}}
+                            @if ($halfStar)
+                                <span class="la la-star-half"></span>
+                            @endif
+
+                            {{-- খালি তারকা --}}
+                            @for ($i = 0; $i < $emptyStars; $i++)
+                                <span class="la la-star-o"></span>
+                            @endfor
+
+
+
                         </div>
-                        <span class="rating-total pl-1">(20,230 ratings)</span>
-                        <span class="student-total pl-2">540,815 students</span>
+                        <span class="rating-total pl-1">({{$count_ratings}} ratings)</span>
+                        <span class="student-total pl-2">{{$unique_student}} students</span>
                     </div>
                 </div><!-- end d-flex -->
                 <p class="pt-2 pb-1">Created by <a href="teacher-detail.html"
-                        class="text-color hover-underline">{{$course['user']['name']}}</a></p>
+                        class="text-color hover-underline">{{ $course['user']['name'] }}</a></p>
                 <div class="d-flex flex-wrap align-items-center">
                     <p class="pr-3 d-flex align-items-center">
                         <svg class="svg-icon-color-gray mr-1" width="16px" viewBox="0 0 24 24">
@@ -35,7 +56,7 @@
                                 d="M23 12l-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68L23 12zm-10 5h-2v-2h2v2zm0-4h-2V7h2v6z">
                             </path>
                         </svg>
-                        Last updated  {{ \Carbon\Carbon::parse($course->updated_at)->format('d F Y') }}
+                        Last updated {{ \Carbon\Carbon::parse($course->updated_at)->format('d F Y') }}
                     </p>
                     <p class="pr-3 d-flex align-items-center">
                         <svg class="svg-icon-color-gray mr-1" width="16px" viewBox="0 0 24 24">
@@ -52,12 +73,12 @@
                         <span class="swapping-btn" data-text-swap="Wishlisted"
                             data-text-original="Wishlist">Wishlist</span>
                     </button>
-                    <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-28 mr-2 mb-2"
-                        data-toggle="modal" data-target="#shareModal">
+                    <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-28 mr-2 mb-2" data-toggle="modal"
+                        data-target="#shareModal">
                         <i class="la la-share mr-1"></i>Share
                     </button>
-                    <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-28 mb-2"
-                        data-toggle="modal" data-target="#reportModal">
+                    <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-28 mb-2" data-toggle="modal"
+                        data-target="#reportModal">
                         <i class="la la-flag mr-1"></i>Report abuse
                     </button>
                 </div>
