@@ -31,6 +31,9 @@ class AuthenticatedSessionController extends Controller
 
         $user = $request->user();
 
+        // Update the last_login_at timestamp
+        $user->update(['last_login_at' => now()]);
+
         if ($user->isAdmin()) {
             return redirect('/admin/dashboard');
         } elseif ($user->isInstructor()) {
@@ -39,7 +42,7 @@ class AuthenticatedSessionController extends Controller
             return redirect('/user/dashboard');
         }
 
-       // return redirect()->intended(route('dashboard', absolute: false));
+        // return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**

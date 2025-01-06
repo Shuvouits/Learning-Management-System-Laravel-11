@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\AdminCourseController;
 use App\Http\Controllers\admin\AdminInstructorController;
 use App\Http\Controllers\admin\AdminReviewController;
+use App\Http\Controllers\admin\AdminUserManageController;
 use App\Http\Controllers\admin\BackendOrderController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ReportController;
@@ -90,6 +91,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::resource('review', AdminReviewController::class);
     Route::post('/update-review-status', [AdminReviewController::class, 'updateStatus'])->name('review.status');
 
+      /*  User Manage  */
+
+    Route::get('/get-user', [AdminUserManageController::class, 'getUser'])->name('manage-user');
+    Route::get('/get-instructor', [AdminUserManageController::class, 'getInstructor'])->name('manage-instructor');
+
 
 });
 
@@ -129,6 +135,8 @@ Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')
      /* Review Setting */
      Route::resource('review', InstructorReviewController::class);
      Route::post('/update-review-status', [InstructorReviewController::class, 'updateStatus'])->name('review.status');
+
+
 
 
 });

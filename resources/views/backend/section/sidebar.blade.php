@@ -83,6 +83,9 @@
 
 
 
+
+
+
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -124,6 +127,26 @@
 
             </ul>
         </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Manage User</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('admin.manage-user')}}"><i class='bx bx-radio-circle'></i>All Users</a>
+                </li>
+
+                <li> <a href="{{route('admin.manage-instructor')}}"><i class='bx bx-radio-circle'></i>All Instructors</a>
+                </li>
+
+
+            </ul>
+        </li>
+
+
+
 
 
 
