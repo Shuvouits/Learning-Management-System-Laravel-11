@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\AdminCourseController;
 use App\Http\Controllers\admin\AdminInstructorController;
+use App\Http\Controllers\admin\AdminReviewController;
 use App\Http\Controllers\admin\BackendOrderController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ReportController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\instructor\InstructorController;
 use App\Http\Controllers\instructor\InstructorOrderController;
 use App\Http\Controllers\instructor\InstructorProfileController;
 use App\Http\Controllers\instructor\InstructorQuestionController;
+use App\Http\Controllers\instructor\InstructorReviewController;
 use App\Http\Controllers\instructor\LectureController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\user\UserController;
@@ -84,6 +86,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     /* Report Settings  */
     Route::resource('report', ReportController::class);
 
+    /* Review Setting */
+    Route::resource('review', AdminReviewController::class);
+    Route::post('/update-review-status', [AdminReviewController::class, 'updateStatus'])->name('review.status');
+
+
 });
 
 /*   Instructor Route  */
@@ -118,6 +125,11 @@ Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')
 
     /*  Question */
     Route::resource('question', InstructorQuestionController::class);
+
+     /* Review Setting */
+     Route::resource('review', InstructorReviewController::class);
+     Route::post('/update-review-status', [InstructorReviewController::class, 'updateStatus'])->name('review.status');
+
 
 });
 
