@@ -28,6 +28,9 @@
 
    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
+   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+   <script src="{{asset('frontend/assets/plugins/select2/js/select2-custom.js')}}"></script>
+
    <script>
        new PerfectScrollbar(".app-container")
    </script>
@@ -35,6 +38,7 @@
    <!---Flora editor--->
    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'>
    </script>
+
    <script>
        // Initialize Froala Editor with a fixed height
        new FroalaEditor('.editor', {

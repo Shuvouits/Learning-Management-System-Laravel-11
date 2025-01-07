@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlogPost;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\CourseLecture;
@@ -20,7 +21,8 @@ class FrontendController extends Controller
 
         $course_category = Category::with('course', 'course.user', 'course.course_goal')->get();
         $categories = Category::all();
-        return view('frontend.index', compact('course_category', 'categories'));
+        $blogs = BlogPost::with('category')->get();
+        return view('frontend.index', compact('course_category', 'categories', 'blogs'));
     }
 
     public function view($slug)

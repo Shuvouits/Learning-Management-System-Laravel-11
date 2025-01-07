@@ -24,6 +24,7 @@
 <!---client logo area--->
 
 <!-----blog-area---->
+@include('frontend.pages.home.blog-area')
 <!----get started area---->
 <!---Subscribe area--->
 

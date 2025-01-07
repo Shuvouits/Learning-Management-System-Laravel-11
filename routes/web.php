@@ -6,6 +6,8 @@ use App\Http\Controllers\admin\AdminInstructorController;
 use App\Http\Controllers\admin\AdminReviewController;
 use App\Http\Controllers\admin\AdminUserManageController;
 use App\Http\Controllers\admin\BackendOrderController;
+use App\Http\Controllers\admin\BlogCategoryController;
+use App\Http\Controllers\admin\BlogController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\SettingController;
@@ -95,6 +97,13 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
 
     Route::get('/get-user', [AdminUserManageController::class, 'getUser'])->name('manage-user');
     Route::get('/get-instructor', [AdminUserManageController::class, 'getInstructor'])->name('manage-instructor');
+
+    /* Manage Blog Category */
+    Route::resource('blog-category', BlogCategoryController::class);
+
+    /* Manage Blog */
+
+    Route::resource('blog', BlogController::class);
 
 
 });
@@ -191,6 +200,10 @@ Route::post('/apply-coupon', [CouponController::class, 'applyCoupon']);
 
 /*  Checkout */
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+
+/* Blog Details  */
+Route::get('/blog-details/{slug}', [BlogController::class, 'blogDetails'])->name('blogDetails');
+Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blogCategory');
 
 
 

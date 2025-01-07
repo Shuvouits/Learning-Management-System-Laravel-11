@@ -26,7 +26,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <scrip>
-    // Trigger toast when the page loads or after an event
+    
     @if(session('success'))
         Swal.fire({
             toast: true,
