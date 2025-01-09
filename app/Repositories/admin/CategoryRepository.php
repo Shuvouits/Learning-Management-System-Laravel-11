@@ -15,6 +15,7 @@ class CategoryRepository
     public function saveCategory($data, $photo)
     {
        $category = new Category();
+
         // Handle file uploads manually
         if ($photo) {
             $category->image = $this->uploadFile($photo, 'category', $category->photo);

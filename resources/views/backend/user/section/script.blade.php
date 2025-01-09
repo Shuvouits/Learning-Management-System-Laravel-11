@@ -23,6 +23,9 @@
 
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
 
+ <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.3/dist/echo.js"></script>
+
+
  <script>
     @if (session('success'))
         Swal.fire({

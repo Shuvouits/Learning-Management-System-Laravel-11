@@ -11,8 +11,10 @@ use App\Http\Controllers\admin\BlogController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\SettingController;
+use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\SubcategoryController;
 use App\Http\Controllers\backend\ProfileController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\FrontendController;
@@ -21,6 +23,7 @@ use App\Http\Controllers\frontend\WishlistController;
 use App\Http\Controllers\instructor\CouponController;
 use App\Http\Controllers\instructor\CourseController;
 use App\Http\Controllers\instructor\CourseSectionController;
+use App\Http\Controllers\instructor\InstructorChatController;
 use App\Http\Controllers\instructor\InstructorController;
 use App\Http\Controllers\instructor\InstructorOrderController;
 use App\Http\Controllers\instructor\InstructorProfileController;
@@ -32,6 +35,7 @@ use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\UserCourseController;
 use App\Http\Controllers\user\UserProfileController;
 use Illuminate\Support\Facades\Route;
+use Chatify\Facades\ChatifyMessenger;
 
 
 
@@ -105,6 +109,10 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
 
     Route::resource('blog', BlogController::class);
 
+     /* Manage Slider  */
+
+     Route::resource('slider', SliderController::class);
+
 
 });
 
@@ -145,6 +153,14 @@ Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')
      Route::resource('review', InstructorReviewController::class);
      Route::post('/update-review-status', [InstructorReviewController::class, 'updateStatus'])->name('review.status');
 
+     /* Managed Chat */
+
+     Route::get('/chat', [InstructorChatController::class, 'index'])->name('chat.index');
+     Route::post('/user/messages', [InstructorChatController::class, 'userMessage']);
+     Route::post('/send-message', [InstructorChatController::class, 'sendMessage']);
+
+
+
 
 
 
@@ -166,7 +182,25 @@ Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user
     Route::get('/wishlist-data', [WishlistController::class, 'getWishlist']);
     Route::delete('/wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
 
+    /* Course Controller  */
+
     Route::resource('course', UserCourseController::class);
+
+    /* purpose Chatify */
+
+
+    /* Chating Section */
+
+    Route::get('/user-message', [ChatController::class, 'userMessage'])->name('message');
+    Route::post('/instructor/messages', [ChatController::class, 'getInstructorMessages']);
+
+    Route::post('/instructor/messages/delete', [ChatController::class, 'deleteMessages'])->name('messages.delete');
+
+    Route::post('/send-message', [ChatController::class, 'sendMessage']);
+
+   // Route::get('/send-pusher', [ChatController::class, 'sendPusher']);
+
+
 });
 
 

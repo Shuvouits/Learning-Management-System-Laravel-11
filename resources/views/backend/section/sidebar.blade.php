@@ -163,6 +163,24 @@
         </li>
 
 
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Application Settings</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('admin.slider.index')}}"><i class='bx bx-radio-circle'></i>Manage Slider</a>
+                </li>
+
+                <li> <a href="{{route('admin.blog.index')}}"><i class='bx bx-radio-circle'></i>All Blogs</a>
+                </li>
+
+
+            </ul>
+        </li>
+
+
 
 
 
