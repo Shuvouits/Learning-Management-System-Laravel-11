@@ -179,6 +179,9 @@
                 <li> <a href="{{route('admin.partner.index')}}"><i class='bx bx-radio-circle'></i>Manage Partner</a>
                 </li>
 
+                <li> <a href="{{route('admin.subscriber.index')}}"><i class='bx bx-radio-circle'></i>Manage Subscriber</a>
+                </li>
+
 
             </ul>
         </li>

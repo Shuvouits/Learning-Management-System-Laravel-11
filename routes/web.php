@@ -11,10 +11,12 @@ use App\Http\Controllers\admin\BlogController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\InfoController;
 use App\Http\Controllers\admin\PartnerController;
+use App\Http\Controllers\admin\PromotionalTemplate;
 use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\SubcategoryController;
+use App\Http\Controllers\admin\SubscriberController;
 use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\frontend\CartController;
@@ -122,6 +124,14 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
      /* Manage Partner  */
 
      Route::resource('partner', PartnerController::class);
+
+     /*  Manage Subscriber  */
+
+     Route::resource('subscriber', SubscriberController::class);
+
+     /* Manage Promotion Template */
+
+     Route::resource('promotion-template', PromotionalTemplate::class);
 
 
 });
