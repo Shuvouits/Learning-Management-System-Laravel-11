@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\BlogCategoryController;
 use App\Http\Controllers\admin\BlogController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\InfoController;
+use App\Http\Controllers\admin\PartnerController;
 use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\SliderController;
@@ -117,6 +118,10 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
      /*  Manage Info */
 
      Route::resource('info', InfoController::class);
+
+     /* Manage Partner  */
+
+     Route::resource('partner', PartnerController::class);
 
 
 });
