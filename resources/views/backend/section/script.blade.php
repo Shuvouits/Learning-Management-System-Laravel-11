@@ -67,6 +67,19 @@
        });
    </script>
 
+<script>
+    $(document).ready(function() {
+        $('#fav').on('change', function(event) {
+            const [file] = event.target.files;
+            if (file) {
+                $('#favPreview')
+                    .attr('src', URL.createObjectURL(file))
+                    .css('display', 'block'); // Show the image preview
+            }
+        });
+    });
+</script>
+
 
 
    <script>

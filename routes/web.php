@@ -10,10 +10,12 @@ use App\Http\Controllers\admin\BlogCategoryController;
 use App\Http\Controllers\admin\BlogController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\InfoController;
+use App\Http\Controllers\admin\PageSettingController;
 use App\Http\Controllers\admin\PartnerController;
 use App\Http\Controllers\admin\PromotionalTemplate;
 use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\SettingController;
+use App\Http\Controllers\admin\SiteSettingController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\SubcategoryController;
 use App\Http\Controllers\admin\SubscriberController;
@@ -132,6 +134,13 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
      /* Manage Promotion Template */
 
      Route::resource('promotion-template', PromotionalTemplate::class);
+
+     /* Manage Site Seetings */
+     Route::resource('site-setting', SiteSettingController::class);
+
+     /*  Manage Page Seetings  */
+
+     Route::resource('page-setting', PageSettingController::class);
 
 
 });

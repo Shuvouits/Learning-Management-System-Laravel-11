@@ -118,6 +118,36 @@
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
                 </div>
+                <div class="menu-title">Application Settings</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('admin.slider.index')}}"><i class='bx bx-radio-circle'></i>Manage Slider</a>
+                </li>
+
+                <li> <a href="{{route('admin.info.index')}}"><i class='bx bx-radio-circle'></i>Manage Info</a>
+                </li>
+
+                <li> <a href="{{route('admin.partner.index')}}"><i class='bx bx-radio-circle'></i>Manage Partner</a>
+                </li>
+
+                <li> <a href="{{route('admin.subscriber.index')}}"><i class='bx bx-radio-circle'></i>Manage Subscriber</a>
+                </li>
+
+                <li> <a href="{{route('admin.site-setting.index')}}"><i class='bx bx-radio-circle'></i>Site Settings</a>
+                </li>
+
+                <li> <a href="{{route('admin.page-setting.index')}}"><i class='bx bx-radio-circle'></i>Site Settings</a>
+                </li>
+
+
+
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
                 <div class="menu-title">Manage Review</div>
             </a>
             <ul>
@@ -127,6 +157,8 @@
 
             </ul>
         </li>
+
+
 
         <li>
             <a href="javascript:;" class="has-arrow">
@@ -163,28 +195,7 @@
         </li>
 
 
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class="bx bx-category"></i>
-                </div>
-                <div class="menu-title">Application Settings</div>
-            </a>
-            <ul>
-                <li> <a href="{{route('admin.slider.index')}}"><i class='bx bx-radio-circle'></i>Manage Slider</a>
-                </li>
 
-                <li> <a href="{{route('admin.info.index')}}"><i class='bx bx-radio-circle'></i>Manage Info</a>
-                </li>
-
-                <li> <a href="{{route('admin.partner.index')}}"><i class='bx bx-radio-circle'></i>Manage Partner</a>
-                </li>
-
-                <li> <a href="{{route('admin.subscriber.index')}}"><i class='bx bx-radio-circle'></i>Manage Subscriber</a>
-                </li>
-
-
-            </ul>
-        </li>
 
 
 
