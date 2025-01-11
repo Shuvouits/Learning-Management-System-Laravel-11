@@ -96,6 +96,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::get('/mail-setting', [SettingController::class, 'mailSetting'])->name('mailSetting');
     Route::post('/mail-settings/update', [SettingController::class, 'updateMailSettings'])->name('mail.settings.update');
 
+    Route::get('stripe-setting', [SettingController::class, 'stripeSetting'])->name('stripeSetting');
+    Route::post('/stripe-settings/update', [SettingController::class, 'updateStripeSettings'])->name('stripe.settings.update');
+
     /* Report Settings  */
     Route::resource('report', ReportController::class);
 
