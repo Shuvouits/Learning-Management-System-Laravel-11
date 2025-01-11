@@ -136,7 +136,7 @@
                 <li> <a href="{{route('admin.site-setting.index')}}"><i class='bx bx-radio-circle'></i>Site Settings</a>
                 </li>
 
-                <li> <a href="{{route('admin.page-setting.index')}}"><i class='bx bx-radio-circle'></i>Site Settings</a>
+                <li> <a href="{{route('admin.page-setting.index')}}"><i class='bx bx-radio-circle'></i>Page Settings</a>
                 </li>
 
 

@@ -3,16 +3,27 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PageSettingRequest;
+use App\Models\PageSetting;
+use App\Services\admin\PageService;
 use Illuminate\Http\Request;
 
 class PageSettingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    protected $pageService;
+
+    public function __construct(PageService $pageService)
+    {
+        $this->pageService = $pageService;
+    }
+
+
+
     public function index()
     {
-        return view('backend.admin.page-setting.index');
+        $page_data = PageSetting::first();
+        return view('backend.admin.page-setting.index', compact('page_data'));
     }
 
     /**
@@ -26,9 +37,18 @@ class PageSettingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PageSettingRequest $request)
     {
-        //
+
+        $data = $request->validated();
+
+        // FAQ fields to JSON
+    if (isset($request->fields)) {
+        $data['faq'] = json_encode($request->fields);
+    }
+         // Pass data and files to the service
+         $this->pageService->savePageService($data, $request->file('about_image'));
+         return redirect()->back()->with('success', 'Page information updated');
     }
 
     /**
