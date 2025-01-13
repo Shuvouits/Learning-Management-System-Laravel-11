@@ -1,4 +1,4 @@
-
+s
 
 
 <script src="{{ asset('frontend/js/jquery-3.4.1.min.js') }}"></script>
@@ -12,11 +12,11 @@
 <script src="{{ asset('frontend/js/datedropper.min.js') }}"></script>
 <script src="{{ asset('frontend/js/emojionearea.min.js') }}"></script>
 <script src="{{ asset('frontend/js/tooltipster.bundle.min.js') }}"></script>
-<script src="{{asset('frontend/js/plyr.js')}}"></script>
+<script src="{{ asset('frontend/js/plyr.js') }}"></script>
 <script src="{{ asset('frontend/js/jquery.lazy.min.js') }}"></script>
 
-<script src="{{asset('frontend/js/jquery-te-1.4.0.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery.MultiFile.min.js')}}"></script>
+<script src="{{ asset('frontend/js/jquery-te-1.4.0.min.js') }}"></script>
+<script src="{{ asset('frontend/js/jquery.MultiFile.min.js') }}"></script>
 
 <script src="{{ asset('frontend/js/main.js') }}"></script>
 <script>
@@ -25,9 +25,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<scrip>
-    
-    @if(session('success'))
+<script>
+    @if (session('success'))
         Swal.fire({
             toast: true,
             icon: 'success',
@@ -48,7 +47,29 @@
 
 
 
+@if ($errors->any())
+    <script>
+        @foreach ($errors->all() as $error)
+
+
+
+            Swal.fire({
+                icon: 'warning',
+                title: '{{ $error }}',
+                showConfirmButton: true,
+
+            });
+        @endforeach
+    </script>
+@endif
+
+
+
+<script src="{{ asset('customjs/wishlist/index.js') }}"></script>
+
+
+
+
 
 
 @stack('scripts')
-

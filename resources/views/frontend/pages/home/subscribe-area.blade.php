@@ -14,13 +14,25 @@
                     <p class="section__desc">Stay in the know on new free e-book</p>
                 </div><!-- end section-heading -->
             </div><!-- end col-lg-5 -->
+
+            @if ($errors->any())
+    <script>
+        @foreach ($errors->all() as $error)
+            toastr.error("{{ $error }}");
+        @endforeach
+    </script>
+@endif
+
+
             <div class="col-lg-5 ml-auto">
-                <form method="post" class="subscriber-form">
+                <form method="post" class="subscriber-form" action="{{ route('frontend.subscribe') }}">
+                    @csrf
                     <div class="input-group">
                         <input type="email" name="email" class="form-control form--control pl-3"
-                            placeholder="Enter email address">
+                            placeholder="Enter email address" required>
+
                         <div class="input-group-append">
-                            <button class="btn theme-btn" type="button">Subscribe <i
+                            <button type="submit" class="btn theme-btn" type="button">Subscribe <i
                                     class="la la-arrow-right icon ml-1"></i></button>
                         </div>
                     </div>

@@ -80,35 +80,21 @@
                 <h3 class="card-title fs-18 pb-2">Post Tags</h3>
                 <div class="divider"><span></span></div>
                 <ul class="generic-list-item generic-list-item-boxed d-flex flex-wrap fs-15">
-                    <li class="mr-2"><a href="#">Business</a></li>
-                    <li class="mr-2"><a href="#">Event</a></li>
-                    <li class="mr-2"><a href="#">Video</a></li>
-                    <li class="mr-2"><a href="#">Audio</a></li>
-                    <li class="mr-2"><a href="#">Software</a></li>
-                    <li class="mr-2"><a href="#">Conference</a></li>
-                    <li class="mr-2"><a href="#">Marketing</a></li>
-                    <li class="mr-2"><a href="#">Freelance</a></li>
-                    <li class="mr-2"><a href="#">Tips</a></li>
-                    <li class="mr-2"><a href="#">Technology</a></li>
-                    <li class="mr-2"><a href="#">Entrepreneur</a></li>
+                    <li class="mr-2"><a href="{{route('blogTag', 'business')}}">Business</a></li>
+                    <li class="mr-2"><a href="{{route('blogTag', 'event')}}">Event</a></li>
+                    <li class="mr-2"><a href="{{route('blogTag', 'video')}}">Video</a></li>
+                    <li class="mr-2"><a href="{{route('blogTag', 'audio')}}">Audio</a></li>
+                    <li class="mr-2"><a href="{{route('blogTag', 'software')}}">Software</a></li>
+                    <li class="mr-2"><a href="{{route('blogTag', 'conference')}}">Conference</a></li>
+                    <li class="mr-2"><a href="{{route('blogTag', 'marketing')}}">Marketing</a></li>
+                    <li class="mr-2"><a href="{{route('blogTag', 'freelance')}}">Freelance</a></li>
+                    <li class="mr-2"><a href="{{route('blogTag', 'tips')}}">Tips</a></li>
+                    <li class="mr-2"><a href="{{route('blogTag', 'technology')}}">Technology</a></li>
+                    <li class="mr-2"><a href="{{route('blogTag', 'entrepreneur')}}">Entrepreneur</a></li>
                 </ul>
             </div>
         </div><!-- end card -->
-        <div class="card card-item">
-            <div class="card-body">
-                <h3 class="card-title fs-18 pb-2">Subscribe</h3>
-                <div class="divider"><span></span></div>
-                <form method="post">
-                    <div class="input-group">
-                        <input class="form-control form--control pl-3" type="email" name="email"
-                            placeholder="Enter email address">
-                        <div class="input-group-append">
-                            <button class="btn theme-btn"><i class="la la-arrow-right"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div><!-- end card -->
+
 
     </div><!-- end sidebar -->
 </div><!-- end col-lg-4 -->

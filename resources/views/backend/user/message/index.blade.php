@@ -265,7 +265,7 @@
 
             // Pusher event
             channel.bind('my-event', function(data) {
-                // alert(JSON.stringify(data));
+                 //alert(JSON.stringify(data));
                 const chatBox = $('#chat-box');
 
                 // Determine class based on sender
@@ -365,7 +365,6 @@
         });
     </script>
 @endpush
-
 
 
 

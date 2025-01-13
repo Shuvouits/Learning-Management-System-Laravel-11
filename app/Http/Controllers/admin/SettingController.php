@@ -4,7 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MailRequest;
+use App\Http\Requests\PusherRequest;
 use App\Http\Requests\StripeRequest;
+use App\Models\Pusher;
 use App\Models\Smtp;
 use App\Models\Stripe;
 use Illuminate\Http\Request;
@@ -39,5 +41,19 @@ class SettingController extends Controller
         Stripe::updateOrCreate(['id' => 1], $request->validated());
 
         return redirect()->back()->with('success', 'Stripe settings updated successfully!');
+    }
+
+    public function pusherSetting()
+    {
+        $pusherSettings = Pusher::first();
+        return view('backend.admin.setting.pusher.index', compact('pusherSettings'));
+    }
+
+    public function updatePusherSettings(PusherRequest $request)
+    {
+
+        Pusher::updateOrCreate(['id' => 1], $request->validated());
+
+        return redirect()->back()->with('success', 'Pusher updated successfully!');
     }
 }

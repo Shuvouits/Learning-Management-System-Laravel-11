@@ -1,60 +1,59 @@
 @extends('frontend.master')
 
 @section('content')
-    @include('frontend.section.breadcrumb')
+    @include('frontend.pages.all-courses.breadcrumb')
 
     <section class="course-area section--padding">
         <div class="container">
-            <div class="filter-bar mb-4">
-                <div class="filter-bar-inner d-flex flex-wrap align-items-center justify-content-between">
-                    <p class="fs-14">We found <span class="text-black">{{$course_data->count()}}</span> courses available for you</p>
-                    <div class="d-flex flex-wrap align-items-center">
-                        <ul class="filter-nav mr-3">
-                            <li><a href="course-grid.html" data-toggle="tooltip" data-placement="top" title="Grid View"
-                                    class="active"><span class="la la-th-large"></span></a></li>
-                            <li><a href="course-list.html" data-toggle="tooltip" data-placement="top"
-                                    title="List View"><span class="la la-list"></span></a></li>
-                        </ul>
 
-                    </div>
-                </div><!-- end filter-bar-inner -->
-            </div><!-- end filter-bar -->
+            @include('frontend.pages.all-courses.filter-area')
+
+
+
             <div class="row">
+
+
 
                 <div class="col-lg-4">
 
-                    @include('frontend.pages.subcategory.left-sidebar')
+                    @include('frontend.pages.all-courses.left-sidebar')
 
-                </div><!-- end col-lg-4 -->
+                </div>
 
+                <div class="col-lg-8 course-main-content" id="">
 
-                <div class="col-lg-8 course-main-content">
-
+                    <!----Javascript load here--->
 
                 </div><!-- end col-lg-8 -->
 
 
+
+
             </div><!-- end row -->
+
+
+
+
+
         </div><!-- end container -->
     </section><!-- end courses-area -->
+
+    <div class="filter-main-content"></div>
 @endsection
 
 
+
 @push('scripts')
+
     <script>
         $(document).ready(function() {
 
             getCourse();
 
 
-
             function getCourse() {
 
-                var category = "{{ $category_name }}";
-                var subcategory = "{{ $subcategory_name }}"
-                console.log(category, subcategory);
-
-                var url = `/course/${category}/${subcategory}`;
+                var url = '/course/all';
 
                 $.ajax({
                     url: url,
@@ -117,4 +116,6 @@
             });
         }
     </script>
+
+    
 @endpush

@@ -7,6 +7,7 @@ use App\Models\Message;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 
 class ChatController extends Controller
 {
@@ -56,7 +57,7 @@ class ChatController extends Controller
             'message' => $data->message,
             'created_at' => $data->created_at,
             'avatar' => $data->user->photo,
-            
+
             'sender' => 'user',
         ];
 

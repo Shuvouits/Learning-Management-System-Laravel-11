@@ -38,6 +38,7 @@
     @yield('content')
 
 
+    @include('frontend.pages.home.subscribe-area')
 
 
      @include('frontend.section.footer')

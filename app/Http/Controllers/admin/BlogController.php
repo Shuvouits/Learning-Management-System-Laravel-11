@@ -103,4 +103,17 @@ class BlogController extends Controller
 
         return redirect()->route('admin.blog.index')->with('success', 'Blog deleted successfully.');
     }
+
+    public function allBlog(){
+        $all_blog = BlogPost::latest()->paginate(9);
+        return view('frontend.pages.blog.all-blog.index', compact('all_blog'));
+    }
+
+    public function blogTag($tag)
+    {
+        // Filter blog posts where the tag matches any of the post_tags
+        $filteredPosts = BlogPost::where('post_tags', 'like', "%{$tag}%")->paginate(10);
+        return view('frontend.pages.blog.tag.index', compact('filteredPosts'));
+    }
+
 }

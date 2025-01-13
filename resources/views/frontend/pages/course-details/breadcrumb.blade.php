@@ -43,8 +43,8 @@
 
 
                         </div>
-                        <span class="rating-total pl-1">({{$count_ratings}} ratings)</span>
-                        <span class="student-total pl-2">{{$unique_student}} students</span>
+                        <span class="rating-total pl-1">({{ $count_ratings }} ratings)</span>
+                        <span class="student-total pl-2">{{ $unique_student }} students</span>
                     </div>
                 </div><!-- end d-flex -->
                 <p class="pt-2 pb-1">Created by <a href="teacher-detail.html"
@@ -68,15 +68,51 @@
                     </p>
                 </div><!-- end d-flex -->
                 <div class="bread-btn-box pt-3">
-                    <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-28 mr-2 mb-2">
-                        <i class="la la-heart-o mr-1"></i>
-                        <span class="swapping-btn" data-text-swap="Wishlisted"
-                            data-text-original="Wishlist">Wishlist</span>
+                    <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-28 mr-2 mb-2 wishlist-icon"
+                        data-course-id="{{ $course->id }}">
+
+                        <?php
+                        // Check if the user is authenticated
+                        if (auth()->check()) {
+                            $user_id = auth()->user()->id;
+
+                            // Check if the course is in the wishlist
+                            $isWishlisted = \App\Models\Wishlist::where('user_id', $user_id)
+                                ->where('course_id', $course->id)
+                                ->first();
+                        } else {
+                            $isWishlisted = null; // Default value for non-authenticated users
+                        }
+                        ?>
+
+                        @if ($isWishlisted)
+                            <i class="la la-heart"></i>
+                            <span class="swapping-btn" data-text-original="Wishlist">Wishlisted</span>
+                        @else
+                            <i class="la la-heart-o"></i>
+                            <span class="swapping-btn" data-text-original="Wishlist">Wishlist</span>
+                        @endif
+
+
                     </button>
-                    <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-28 mr-2 mb-2" data-toggle="modal"
+
+                    {{--
+
+                      <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-28 mr-2 mb-2" data-toggle="modal"
                         data-target="#shareModal">
                         <i class="la la-share mr-1"></i>Share
                     </button>
+
+
+                    --}}
+
+
+                    <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-28 mr-2 mb-2" id="shareButton">
+                        <i class="la la-share mr-1"></i>Share
+                    </button>
+                    <input type="text" id="copyURLInput" value="{{ url()->current() }}"
+                        style="position: absolute; left: -9999px;">
+
                     <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-28 mb-2" data-toggle="modal"
                         data-target="#reportModal">
                         <i class="la la-flag mr-1"></i>Report abuse
@@ -86,3 +122,32 @@
         </div><!-- end col-lg-8 -->
     </div><!-- end container -->
 </section><!-- end breadcrumb-area -->
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#shareButton').on('click', function() {
+                // Select the hidden input
+                var $urlInput = $('#copyURLInput');
+
+                // Select and copy the value
+                $urlInput.select();
+                $urlInput[0].setSelectionRange(0, 99999); // For mobile devices
+
+                // Copy to clipboard
+                document.execCommand('copy');
+
+                // Show success message
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'URL copied to clipboard!',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                });
+            });
+        });
+    </script>
+@endpush

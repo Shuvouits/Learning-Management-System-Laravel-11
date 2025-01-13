@@ -3,7 +3,7 @@
 
 @section('content')
 
-@include('frontend.pages.blog.breadcrumb')
+@include('frontend.section.breadcrumb')
 
 <section class="blog-area pt-100px pb-100px">
     <div class="container">

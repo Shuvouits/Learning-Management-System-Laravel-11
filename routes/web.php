@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Http\Controllers\admin\AdminController;
@@ -99,6 +100,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::get('stripe-setting', [SettingController::class, 'stripeSetting'])->name('stripeSetting');
     Route::post('/stripe-settings/update', [SettingController::class, 'updateStripeSettings'])->name('stripe.settings.update');
 
+    Route::get('pusher-setting', [SettingController::class, 'pusherSetting'])->name('pusherSetting');
+    Route::post('/pusher-settings/update', [SettingController::class, 'updatePusherSettings'])->name('pusher.settings.update');
+
     /* Report Settings  */
     Route::resource('report', ReportController::class);
 
@@ -106,7 +110,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::resource('review', AdminReviewController::class);
     Route::post('/update-review-status', [AdminReviewController::class, 'updateStatus'])->name('review.status');
 
-      /*  User Manage  */
+    /*  User Manage  */
 
     Route::get('/get-user', [AdminUserManageController::class, 'getUser'])->name('manage-user');
     Route::get('/get-instructor', [AdminUserManageController::class, 'getInstructor'])->name('manage-instructor');
@@ -118,34 +122,32 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
 
     Route::resource('blog', BlogController::class);
 
-     /* Manage Slider  */
+    /* Manage Slider  */
 
-     Route::resource('slider', SliderController::class);
+    Route::resource('slider', SliderController::class);
 
-     /*  Manage Info */
+    /*  Manage Info */
 
-     Route::resource('info', InfoController::class);
+    Route::resource('info', InfoController::class);
 
-     /* Manage Partner  */
+    /* Manage Partner  */
 
-     Route::resource('partner', PartnerController::class);
+    Route::resource('partner', PartnerController::class);
 
-     /*  Manage Subscriber  */
+    /*  Manage Subscriber  */
 
-     Route::resource('subscriber', SubscriberController::class);
+    Route::resource('subscriber', SubscriberController::class);
 
-     /* Manage Promotion Template */
+    /* Manage Promotion Template */
 
-     Route::resource('promotion-template', PromotionalTemplate::class);
+    Route::resource('promotion-template', PromotionalTemplate::class);
 
-     /* Manage Site Seetings */
-     Route::resource('site-setting', SiteSettingController::class);
+    /* Manage Site Seetings */
+    Route::resource('site-setting', SiteSettingController::class);
 
-     /*  Manage Page Seetings  */
+    /*  Manage Page Seetings  */
 
-     Route::resource('page-setting', PageSettingController::class);
-
-
+    Route::resource('page-setting', PageSettingController::class);
 });
 
 /*   Instructor Route  */
@@ -181,21 +183,15 @@ Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')
     /*  Question */
     Route::resource('question', InstructorQuestionController::class);
 
-     /* Review Setting */
-     Route::resource('review', InstructorReviewController::class);
-     Route::post('/update-review-status', [InstructorReviewController::class, 'updateStatus'])->name('review.status');
+    /* Review Setting */
+    Route::resource('review', InstructorReviewController::class);
+    Route::post('/update-review-status', [InstructorReviewController::class, 'updateStatus'])->name('review.status');
 
-     /* Managed Chat */
+    /* Managed Chat */
 
-     Route::get('/chat', [InstructorChatController::class, 'index'])->name('chat.index');
-     Route::post('/user/messages', [InstructorChatController::class, 'userMessage']);
-     Route::post('/send-message', [InstructorChatController::class, 'sendMessage']);
-
-
-
-
-
-
+    Route::get('/chat', [InstructorChatController::class, 'index'])->name('chat.index');
+    Route::post('/user/messages', [InstructorChatController::class, 'userMessage']);
+    Route::post('/send-message', [InstructorChatController::class, 'sendMessage']);
 });
 
 Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user.')->group(function () {
@@ -230,20 +226,42 @@ Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user
 
     Route::post('/send-message', [ChatController::class, 'sendMessage']);
 
-   // Route::get('/send-pusher', [ChatController::class, 'sendPusher']);
+    // Route::get('/send-pusher', [ChatController::class, 'sendPusher']);
 
 
 });
 
 
 /*  All Frontend Route */
-
-
 Route::get('/', [FrontendController::class, 'index']);
+
+/*  Courses Live search  */
+Route::get('/search-courses', [FrontendController::class, 'search'])->name('courses.search');
+
+/* All Courses */
+Route::get('/all-courses', [FrontendController::class, 'allCourses'])->name('allCourse');
+/*  ajax url  */
+Route::get('/course/all', [FrontendController::class, 'courseAll']);
+
+/* ajax pagination */
+
+Route::get('/courses', [FrontendController::class, 'pagination']);
+
+Route::get('/all-course/filter', [FrontendController::class, 'courseFilter']);
+
+/*  user subscribe  */
+Route::post('/user-subscribe', [FrontendController::class, 'userSubscribe'])->name('frontend.subscribe');
+
 
 Route::get('/course-details/{slug}', [FrontendController::class, 'view'])->name('course-details');
 Route::get('/category/{slug}', [FrontendController::class, 'courseCategory'])->name('course-category');
+
 Route::get('/course/{category}/{subcategory}', [FrontendController::class, 'courseSubcategory'])->name('course-subcategory');
+
+Route::get('/category-course/filter', [FrontendController::class, 'categoryCourseFilter']);
+
+
+
 Route::get('/all-category', [FrontendController::class, 'allCategory'])->name('all-category');
 
 Route::get('/instructor/{name}/{id}', [FrontendController::class, 'instructor'])->name('instructor');
@@ -270,6 +288,12 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.in
 /* Blog Details  */
 Route::get('/blog-details/{slug}', [BlogController::class, 'blogDetails'])->name('blogDetails');
 Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blogCategory');
+Route::get('/blogs', [BlogController::class, 'allBlog'])->name('allBlog');
+
+/*  Blog Tag Filter */
+
+Route::get('/blog-tag/{tag}', [BlogController::class, 'blogTag'])->name('blogTag');
+
 
 
 
@@ -280,8 +304,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/payment-success', [OrderController::class, 'success'])->name('success');
     Route::get('/payment-cancel', [OrderController::class, 'cancel'])->name('cancel');
     Route::resource('rating', RatingController::class);
-
-
 });
 
 

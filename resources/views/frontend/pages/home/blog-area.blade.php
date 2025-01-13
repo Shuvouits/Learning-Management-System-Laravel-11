@@ -10,15 +10,15 @@
             @foreach($blogs as $item)
             <div class="card card-item">
                 <div class="card-image">
-                    <a href="blog-single.html" class="d-block">
+                    <a href="{{route('blogDetails', $item->post_slug)}}" class="d-block">
                         <img class="card-img-top" src="{{asset($item->post_image)}}" alt="Card image cap">
                     </a>
                     <div class="course-badge-labels">
-                        <div class="course-badge">{{$item->created_at}}</div>
+                        <div class="course-badge">{{ $item->created_at->format('d F Y') }}</div>
                     </div>
                 </div><!-- end card-image -->
                 <div class="card-body">
-                    <h5 class="card-title"><a href="blog-single.html">{{$item->post_title}}</a>
+                    <h5 class="card-title"><a href="{{route('blogDetails', $item->post_slug)}}">{{$item->post_title}}</a>
                     </h5>
                     <ul
                         class="generic-list-item generic-list-item-bullet generic-list-item--bullet d-flex align-items-center flex-wrap fs-14 pt-2">

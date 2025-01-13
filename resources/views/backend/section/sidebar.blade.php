@@ -99,6 +99,8 @@
                 <li> <a href="{{route('admin.stripeSetting')}}"><i class='bx bx-radio-circle'></i>Stripe Setting</a>
                 </li>
 
+               
+
 
 
             </ul>

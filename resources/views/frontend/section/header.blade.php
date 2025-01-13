@@ -2,6 +2,31 @@
 $category = getCategories();
 ?>
 
+<style>
+    .search-results {
+        position: absolute;
+        background: #fff;
+        width: 100%;
+        max-height: 300px;
+        overflow-y: auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        top:90%;
+    }
+
+    .search-results a {
+        display: block;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .search-results a:hover {
+        background: #f4f4f4;
+    }
+</style>
+
 
 <header class="header-menu-area bg-white">
     <div class="header-top pr-150px pl-150px border-bottom border-bottom-gray py-1">
@@ -120,13 +145,17 @@ $category = getCategories();
                                     </li>
                                 </ul>
                             </div><!-- end menu-category -->
-                            <form method="post">
-                                <div class="form-group mb-0">
-                                    <input class="form-control form--control pl-3" type="text" name="search"
+
+                            <form method="GET" action="#" id="search-form">
+                                <div class="form-group mb-0 position-relative">
+                                    <input class="form-control form--control pl-3" type="text" name="search" id="search-input"
                                         placeholder="Search for anything">
                                     <span class="la la-search search-icon"></span>
                                 </div>
                             </form>
+                            <div id="search-results" class="search-results"></div>
+
+
                             <nav class="main-menu">
                                 <ul>
                                     <li>
@@ -134,7 +163,7 @@ $category = getCategories();
 
                                     </li>
                                     <li>
-                                        <a href="#">All Courses </a>
+                                        <a href="{{route('allCourse')}}">All Courses </a>
 
                                     </li>
                                     <li>
@@ -143,7 +172,7 @@ $category = getCategories();
                                     </li>
 
                                     <li>
-                                        <a href="#">Blog </a>
+                                        <a href="{{route('allBlog')}}">Blog </a>
 
                                     </li>
                                 </ul><!-- end ul -->
@@ -206,10 +235,7 @@ $category = getCategories();
 
 
 
-                            <div class="nav-right-button">
-                                <a href="admission.html" class="btn theme-btn d-none d-lg-inline-block"><i
-                                        class="la la-user-plus mr-1"></i> Admission</a>
-                            </div><!-- end nav-right-button -->
+                           
                         </div><!-- end menu-wrapper -->
                     </div><!-- end col-lg-10 -->
                 </div><!-- end row -->
@@ -304,3 +330,57 @@ $category = getCategories();
     </div><!-- end mobile-search-form -->
     <div class="body-overlay"></div>
 </header><!-- end header-menu-area -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#search-input').on('keyup', function () {
+            let query = $(this).val();
+
+            if (query.length > 0) {
+                $.ajax({
+                    url: "{{ route('courses.search') }}",
+                    method: "GET",
+                    data: { query: query },
+                    success: function (response) {
+                        console.log(response);
+                        let html = '';
+
+                        if (response.length > 0) {
+                            response.forEach(course => {
+                                html += `
+                                    <a href="/course-details/${course.course_name_slug}">
+                                        <div class="d-flex align-items-center">
+                                            <img src="${course.course_image}" alt="${course.course_title}" class="img-thumbnail" width="100">
+                                            <div class="ml-3">
+                                                <h6>${course.course_title}</h6>
+                                                <p>${course.course_name}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                `;
+                            });
+                        } else {
+                            html = `<p class="text-muted p-2">No courses found.</p>`;
+                        }
+
+                        $('#search-results').html(html).show();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('AJAX Error:', error);
+                    }
+                });
+            } else {
+                $('#search-results').hide();
+            }
+        });
+
+        // Hide results on click outside
+        $(document).click(function (e) {
+            if (!$(e.target).closest('#search-form, #search-results').length) {
+                $('#search-results').hide();
+            }
+        });
+    });
+</script>

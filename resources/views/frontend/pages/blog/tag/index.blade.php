@@ -1,37 +1,15 @@
-@extends('frontend.master')
 
+@extends('frontend.master')
 
 @section('content')
 
-<section class="breadcrumb-area section-padding img-bg-2">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="breadcrumb-content d-flex flex-wrap align-items-center justify-content-between">
-            <div class="section-heading">
-                <h2 class="section__title text-white">Blog List</h2>
-            </div>
-            <ul class="generic-list-item generic-list-item-white generic-list-item-arrow d-flex flex-wrap align-items-center">
-                <li><a href="/">Home</a></li>
-                <li>Blogs</li>
-                <li>Blog List</li>
-            </ul>
-        </div><!-- end breadcrumb-content -->
-    </div><!-- end container -->
-</section>
+@include('frontend.section.breadcrumb')
 
-
-<section class="course-area section-padding">
-    <div class="container">
-        <div class="filter-bar mb-4">
-            <div class="filter-bar-inner d-flex flex-wrap align-items-center justify-content-between">
-                <p class="fs-14">We found <span class="text-black">{{$blog_data['blogpost']->count()}}</span> courses available for you</p>
-
-            </div><!-- end filter-bar-inner -->
-
-        </div><!-- end filter-bar -->
+<section class="blog-area section--padding">
+    <div class="container-fluid">
         <div class="row">
 
-            @foreach($blog_posts as $item)
+            @foreach($filteredPosts as $item)
             <div class="col-lg-4">
                 <div class="card card-item">
                     <div class="card-image">
@@ -66,15 +44,14 @@
             </div><!-- end col-lg-4 -->
             @endforeach
 
-
         </div><!-- end row -->
 
 
-        @include('frontend.section.pagination', ['data' => $blog_posts])
 
+    </div><!-- end container-fluid -->
 
-
-    </div><!-- end container -->
+    @include('frontend.section.pagination', ['data' => $filteredPosts])
 </section>
+
 
 @endsection

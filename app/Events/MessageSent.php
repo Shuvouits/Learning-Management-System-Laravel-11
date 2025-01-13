@@ -44,5 +44,7 @@ class MessageSent implements ShouldBroadcast
     public function broadcastAs()
     {
         return 'my-event';
+
+
     }
 }
