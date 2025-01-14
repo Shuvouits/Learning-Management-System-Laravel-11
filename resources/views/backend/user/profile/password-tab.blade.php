@@ -39,27 +39,9 @@
                 </div>
             </div><!-- end input-box -->
             <div class="input-box col-lg-12 py-2">
-                <button class="btn theme-btn">Change Password</button>
+                <button type="submit" class="btn theme-btn">Change Password</button>
             </div><!-- end input-box -->
         </form>
-        <form method="post" class="pt-5 mt-5 border-top border-top-gray">
-            <h3 class="fs-17 font-weight-semi-bold pb-1">Forgot Password then Recover Password</h3>
-            <p class="pb-4">Enter the email of your account to reset password. Then you will
-                receive a link to email
-                to reset the password. If you have any issue about reset password
-                <a href="contact.html" class="text-color">contact us</a>
-            </p>
-            <div class="input-box">
-                <label class="label-text">Email Address</label>
-                <div class="form-group">
-                    <input class="form-control form--control" type="email" name="email"
-                        placeholder="Enter email address">
-                    <span class="la la-envelope input-icon"></span>
-                </div>
-            </div><!-- end input-box -->
-            <div class="input-box py-2">
-                <button class="btn theme-btn">Recover Password</button>
-            </div><!-- end input-box -->
-        </form>
+
     </div><!-- end setting-body -->
 </div><!-- end tab-pane -->

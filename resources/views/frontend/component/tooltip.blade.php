@@ -44,10 +44,37 @@ $course_category = getCourseCategories();
                         </ul>
                         <div class="d-flex justify-content-between align-items-center">
 
-                            <a href="javascript:void(0)" class="btn theme-btn flex-grow-1 mr-3 add-to-cart-btn"
+                            {{--
+
+                              <a href="javascript:void(0)" class="btn theme-btn flex-grow-1 mr-3 add-to-cart-btn"
                                 data-course-id="{{ $course->id }}">
                                 <i class="la la-shopping-cart mr-1 fs-18"></i> Add to Cart
                             </a>
+
+
+                            --}}
+
+
+
+                            @php
+    $course_purchase_count = 0;
+
+    if (auth()->check()) { // Check if the user is authenticated
+        $user_id = auth()->user()->id;
+        $course_purchase_count = \App\Models\Order::where('user_id', $user_id)->where('course_id', $course->id)->count();
+    }
+@endphp
+
+@if($course_purchase_count == 0)
+    <button type="button" class="btn theme-btn w-100 mb-2 add-to-cart-btn" data-course-id="{{ $course->id }}">
+        <i class="la la-shopping-cart fs-18 mr-1"></i> Add to cart
+    </button>
+@else
+    <a href="/user/course/{{$course->course_name_slug}}" class="btn theme-btn w-100 theme-btn-white mb-2">
+        <i class="la la-shopping-bag mr-1"></i> Go To Course
+    </a>
+@endif
+
 
                             <div class="icon-element icon-element-sm shadow-sm cursor-pointer wishlist-icon"
                                 title="Add to Wishlist" data-course-id="{{ $course->id }}">

@@ -47,25 +47,23 @@
             <div class="buy-course-btn-box">
 
                 @php
+                $user_id = auth()->check() ? auth()->user()->id : null;
+                $course_purchase_count = 0;
 
-                 $user_id = auth()->user()->id;
+                if ($user_id) {
+                    $course_purchase_count = \App\Models\Order::where('user_id', $user_id)->where('course_id', $course->id)->count();
+                }
+            @endphp
 
-                 $course_purchase_count = \App\Models\Order::where('user_id', $user_id)->where('course_id', $course->id)->count();
-
-                @endphp
-
-
-                @if($course_purchase_count == 0)
-
-                <button type="button" class="btn theme-btn w-100 mb-2 add-to-cart-btn" data-course-id="{{ $course->id }}"><i
-                    class="la la-shopping-cart fs-18 mr-1"></i> Add to cart</button>
-
-                @else
-
-                <a href="/user/course/{{$course->course_name_slug}}" class="btn theme-btn w-100 theme-btn-white mb-2"><i
-                    class="la la-shopping-bag mr-1"></i> Go To Course</a>
-
-                @endif
+            @if($course_purchase_count == 0)
+                <button type="button" class="btn theme-btn w-100 mb-2 add-to-cart-btn" data-course-id="{{ $course->id }}">
+                    <i class="la la-shopping-cart fs-18 mr-1"></i> Add to cart
+                </button>
+            @else
+                <a href="/user/course/{{ $course->course_name_slug }}" class="btn theme-btn w-100 theme-btn-white mb-2">
+                    <i class="la la-shopping-bag mr-1"></i> Go To Course
+                </a>
+            @endif
 
 
             </div>

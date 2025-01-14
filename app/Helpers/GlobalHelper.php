@@ -76,7 +76,7 @@ function auth_check_json()
     }
 
 
-    
+
 
 
     if (!function_exists('getInstructorInfo')) {
@@ -102,4 +102,19 @@ function auth_check_json()
             return Partner::latest()->get();
         }
     }
+
+
+    /** Set sidebar active **/
+
+if(!function_exists('setSidebarActive')){
+    function setSidebarActive(array $routes) : ?String
+    {
+        foreach($routes as $route){
+            if(request()->routeIs($route)){
+                return 'page-active';
+            }
+        }
+        return null;
+    }
+}
 

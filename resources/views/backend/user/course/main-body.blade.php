@@ -14,17 +14,68 @@
         </a>
     </p>
 
+
+
     <div class="rating-wrap d-flex align-items-center py-2">
         <div class="review-stars">
-            <span class="rating-number">4.4</span>
-            <span class="la la-star"></span>
-            <span class="la la-star"></span>
-            <span class="la la-star"></span>
-            <span class="la la-star"></span>
-            <span class="la la-star-o"></span>
+
+            @php
+
+                $count_ratings = \App\Models\Review::where('status', 1)
+                    ->where('course_id', $item->course->id)
+                    ->count();
+                $unique_student = \App\Models\Review::where('status', 1)
+                    ->where('course_id', $item->course->id)
+                    ->distinct()
+                    ->pluck('user_id')
+                    ->count();
+
+                $averageRating = \App\Models\Review::where(
+                    'course_id',
+                    $item->course->id,
+                )
+                    ->where('status', 1)
+                    ->avg('rating');
+
+                $purchase_course_student_number = \App\Models\Order::where('course_id', $item->course->id)->count();
+
+            @endphp
+
+
+
+            <span
+                class="rating-number">{{ number_format($averageRating, 1) }}</span>
+
+            @php
+                $fullStars = floor($averageRating); // পূর্ণ তারকার সংখ্যা
+                $halfStar = $averageRating - $fullStars >= 0.5 ? 1 : 0; // অর্ধেক তারকা (যদি থাকে)
+                $emptyStars = 5 - $fullStars - $halfStar; // খালি তারকার সংখ্যা
+            @endphp
+
+            {{-- পূর্ণ তারকা --}}
+            @for ($i = 0; $i < $fullStars; $i++)
+                <span class="la la-star"></span>
+            @endfor
+
+            {{-- অর্ধেক তারকা --}}
+            @if ($halfStar)
+                <span class="la la-star-half"></span>
+            @endif
+
+            {{-- খালি তারকা --}}
+            @for ($i = 0; $i < $emptyStars; $i++)
+                <span class="la la-star-o"></span>
+            @endfor
+
+
+
         </div>
-        <span class="rating-total pl-1">(20,230)</span>
+        <span class="rating-total pl-1">({{ $count_ratings }} ratings)</span>
+        <span class="student-total pl-2">{{ $unique_student }} students</span>
+
     </div><!-- end rating-wrap -->
+
+
     <ul class="card-duration d-flex align-items-center fs-15 pb-2">
         <li class="mr-2">
             <span class="text-black">Status:</span>
@@ -36,27 +87,15 @@
         </li>
         <li class="mr-2">
             <span class="text-black">Duration:</span>
-            <span>3 hours 20 min</span>
+            @php
+             $total_lecture_duration = \App\Models\CourseLecture::where('course_id', $item->course->id)->sum('video_duration');
+            @endphp
+            <span>{{ number_format($total_lecture_duration / 60, 2) }} Hours</span>
         </li>
         <li class="mr-2">
             <span class="text-black">Students:</span>
-            <span>30,405</span>
+            <span>{{$purchase_course_student_number}}</span>
         </li>
     </ul>
-    <div class="d-flex justify-content-between align-items-center">
-        <p class="card-price text-black font-weight-bold">${{ $item->price }}</p>
-        <div class="card-action-wrap pl-3">
-            <a href="course-details.html"
-                class="icon-element icon-element-sm shadow-sm cursor-pointer ml-1 text-success"
-                data-toggle="tooltip" data-placement="top" data-title="View"><i class="la la-eye"></i></a>
-            <div class="icon-element icon-element-sm shadow-sm cursor-pointer ml-1 text-secondary"
-                data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="la la-edit"></i>
-            </div>
-            <div class="icon-element icon-element-sm shadow-sm cursor-pointer ml-1 text-danger"
-                data-toggle="tooltip" data-placement="top" title="Delete">
-                <span data-toggle="modal" data-target="#itemDeleteModal"
-                    class="w-100 h-100 d-inline-block"><i class="la la-trash"></i></span>
-            </div>
-        </div>
-    </div>
+
 </div><!-- end card-body -->

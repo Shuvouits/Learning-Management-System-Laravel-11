@@ -48,7 +48,7 @@
 
 
 
-   @include('backend.user.course.pagination')
+   @include('frontend.section.pagination', ['data' => $courses])
 
 
 

@@ -17,24 +17,8 @@
                 Password
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" id="change-email-tab" data-toggle="tab" href="#change-email" role="tab"
-                aria-controls="change-email" aria-selected="false">
-                Change Email
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="withdraw-tab" data-toggle="tab" href="#withdraw" role="tab" aria-controls="withdraw"
-                aria-selected="false">
-                Withdraw
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account"
-                aria-selected="false">
-                Account
-            </a>
-        </li>
+
+
     </ul>
     <div class="tab-content" id="myTabContent">
 
@@ -42,11 +26,7 @@
 
         @include('backend.user.profile.password-tab')
 
-        @include('backend.user.profile.mail-tab')
-
-        @include('backend.user.profile.withdraw-tab')
-
-        @include('backend.user.profile.account-tab')
+       
 
 
     </div><!-- end tab-content -->

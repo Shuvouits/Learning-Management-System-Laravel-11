@@ -227,6 +227,8 @@ Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user
 
     Route::post('/send-message', [ChatController::class, 'sendMessage']);
 
+    Route::get('/purchase-history', [UserController::class, 'purchaseHistory'])->name('purchaseHistory');
+
     // Route::get('/send-pusher', [ChatController::class, 'sendPusher']);
 
 
