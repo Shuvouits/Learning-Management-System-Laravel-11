@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Aduca - Education HTML Template</title>
+    <title>Aduca - Professional LMS</title>
 
     @include('frontend.section.link')
     <!-- end inject -->
@@ -57,15 +57,15 @@
                         <div class="lecture-video-detail-body">
                             <div class="tab-content" id="myTabContent">
 
-                               @include('backend.user.lession.tab.overview')
+                                @include('backend.user.lession.tab.overview')
 
-                               @include('backend.user.lession.tab.question')
+                                @include('backend.user.lession.tab.question')
 
                             </div><!-- end tab-content -->
 
                         </div><!-- end lecture-video-detail-body -->
                     </div><!-- end lecture-video-detail -->
-                    
+
                     <div class="cta-area py-4 bg-gray">
                         <div class="container-fluid">
                             <div class="row align-items-center">
@@ -103,7 +103,7 @@
 
 
 
-               @include('backend.user.lession.right-section-content')
+                @include('backend.user.lession.right-section-content')
 
 
 
@@ -151,6 +151,24 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        // Function to set the current URL in the modal input
+        function setShareModalURL() {
+            const currentURL = window.location.href; // Get the current page URL
+            const shareInput = document.getElementById('shareModalInput');
+            shareInput.value = currentURL; // Set the URL in the input field
+        }
+
+        // Function to copy the input value to the clipboard
+        function copyToClipboard() {
+            const shareInput = document.getElementById('shareModalInput');
+            shareInput.select(); // Select the input text
+            document.execCommand('copy'); // Copy to clipboard
+            // Show a success message
+
+        }
     </script>
 
 

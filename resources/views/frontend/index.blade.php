@@ -31,12 +31,13 @@
 
 <!-----blog-area---->
 @include('frontend.pages.home.blog-area')
+
 <!----get started area---->
 @include('frontend.pages.home.get-started-area')
 <!---Subscribe area--->
 
 
-
+@include('frontend.pages.home.subscribe-area')
 
 
 

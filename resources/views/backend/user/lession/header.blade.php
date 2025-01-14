@@ -58,10 +58,17 @@
                             class="btn theme-btn theme-btn-sm theme-btn-transparent lh-26 text-white mr-2"
                             data-toggle="modal" data-target="#ratingModal"><i class="la la-star mr-1"></i> leave
                             a rating</a>
-                        <a href="#"
-                            class="btn theme-btn theme-btn-sm theme-btn-transparent lh-26 text-white mr-2"
-                            data-toggle="modal" data-target="#shareModal"><i class="la la-share mr-1"></i>
-                            share</a>
+
+                            <a href="#"
+   class="btn theme-btn theme-btn-sm theme-btn-transparent lh-26 text-white mr-2"
+   data-toggle="modal"
+   data-target="#shareModal"
+   onclick="setShareModalURL()">
+   <i class="la la-share mr-1"></i> Share
+</a>
+
+
+
                         <div class="generic-action-wrap generic--action-wrap">
                             <div class="dropdown">
                                 <a class="action-btn" href="#" role="button" id="dropdownMenuLink"

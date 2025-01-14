@@ -12,7 +12,14 @@
                 </p>
             </div>
         </li>
+
+
+
     @empty
         <li>No items in the wishlist.</li>
     @endforelse
+
+    <li>
+        <a href="{{route('user.wishlist.index')}}" class="btn theme-btn w-100">Check Wishlist <i class="la la-arrow-right icon ml-1"></i></a>
+    </li>
 </ul>

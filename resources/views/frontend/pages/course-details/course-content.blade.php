@@ -52,11 +52,11 @@
                                     <li>
                                         <a href="#"
                                             class="d-flex align-items-center justify-content-between text-color"
-                                            data-toggle="modal" data-target="#previewModal">
+                                            data-toggle="modal" data-target="">
                                             <span>
                                                 <i class="la la-play-circle mr-1"></i>
                                                 {{ $lecture->lecture_title }}
-                                                <span class="ribbon ml-2 fs-13">Preview</span>
+                                                
                                             </span>
                                             <span>{{$lecture->video_duration}}</span>
                                         </a>

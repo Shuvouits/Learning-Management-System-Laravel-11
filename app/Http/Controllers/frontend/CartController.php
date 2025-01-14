@@ -18,8 +18,9 @@ class CartController extends Controller
         $this->cartService = $cartService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+
 
         return view('frontend.pages.cart.index');
     }

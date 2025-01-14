@@ -1,7 +1,9 @@
 @extends('frontend.master')
 
 @section('content')
-    @include('frontend.section.breadcrumb')
+
+@include('frontend.section.breadcrumb', ['title' => $subcategory_name])
+
 
     <section class="course-area section--padding">
         <div class="container">

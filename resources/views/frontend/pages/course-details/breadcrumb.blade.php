@@ -113,10 +113,7 @@
                     <input type="text" id="copyURLInput" value="{{ url()->current() }}"
                         style="position: absolute; left: -9999px;">
 
-                    <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-28 mb-2" data-toggle="modal"
-                        data-target="#reportModal">
-                        <i class="la la-flag mr-1"></i>Report abuse
-                    </button>
+                    
                 </div>
             </div><!-- end breadcrumb-content -->
         </div><!-- end col-lg-8 -->

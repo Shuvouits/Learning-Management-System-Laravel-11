@@ -34,8 +34,8 @@
                                         data-tooltip-content="#{{ $course->course_name_slug }}">
 
                                         <div class="card-image">
-                                            <a href="course-details.html" class="d-block">
-                                                <img class="card-img-top lazy" src="{{ asset($course->course_image) }}"
+                                            <a href="{{ route('course-details', $course->course_name_slug) }}" class="d-block">
+                                                <img class="card-img-top lazy" width="240" height="240" src="{{ asset($course->course_image) }}"
                                                     data-src="{{ asset($course->course_image) }}" alt="Card image cap">
                                             </a>
                                             <div class="course-badge-labels">
@@ -60,8 +60,10 @@
                                                 style="text-transform:capitalize">{{ $course->label }}
                                             </h6>
 
-                                            <h5 class="card-title"><a
-                                                    href="{{ route('course-details', $course->course_name_slug) }}">{{ $course->course_name }}</a>
+                                            <h5 class="card-title">
+                                                <a href="{{ route('course-details', $course->course_name_slug) }}">
+                                                    {{ \Illuminate\Support\Str::limit($course->course_name, 50) }}
+                                                </a>
                                             </h5>
 
                                             <p class="card-text">

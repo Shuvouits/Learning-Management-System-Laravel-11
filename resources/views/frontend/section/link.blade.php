@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="{{ asset('frontend/css/tooltipster.bundle.css') }}">
 <link rel="stylesheet" href="{{asset('frontend/css/plyr.css')}}">
 <link rel="stylesheet" href="{{asset('frontend/css/jquery-te-1.4.0.css')}}">
+
 <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
 
 <style>

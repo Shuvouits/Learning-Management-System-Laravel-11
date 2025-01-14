@@ -3,7 +3,7 @@
         <div class="container">
             <div class="section-heading text-center">
                 <h5 class="ribbon ribbon-lg mb-2">Learn on your schedule</h5>
-                <h2 class="section__title">Most Popular Courses</h2>
+                <h2 class="section__title">Most Selling Courses</h2>
                 <span class="section-divider"></span>
             </div><!-- end section-heading -->
             <div class="course-carousel owl-action-styled owl--action-styled mt-30px">
@@ -11,7 +11,7 @@
                 @foreach($most_popular_courses as $index => $item)
                 <div class="card card-item card-preview" data-tooltip-content="#{{$item->course->course_name_slug}}">
                     <div class="card-image">
-                        <a href="course-details.html" class="d-block">
+                        <a href="{{ route('course-details', $item->course->course_name_slug) }}" class="d-block">
                             <img class="card-img-top" src="{{ asset($item->course->course_image) }}" width="250" height="250" alt="Card image cap">
                         </a>
                         <div class="course-badge-labels">
@@ -36,9 +36,12 @@
                             {{ $item->course->label }}
                         </h6>
 
-                        <h5 class="card-title"><a
-                            href="{{ route('course-details', $item->course->course_name_slug) }}">{{ $item->course->course_name }}</a>
-                    </h5>
+
+                        <h5 class="card-title">
+                            <a href="{{ route('course-details', $item->course->course_name_slug) }}">
+                                {{ \Illuminate\Support\Str::limit($item->course->course_name, 50) }}
+                            </a>
+                        </h5>
 
                     <p class="card-text">
                         <a

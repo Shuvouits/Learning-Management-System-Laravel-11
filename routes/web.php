@@ -26,6 +26,7 @@ use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\frontend\OrderController;
+use App\Http\Controllers\frontend\PageController;
 use App\Http\Controllers\frontend\WishlistController;
 use App\Http\Controllers\instructor\CouponController;
 use App\Http\Controllers\instructor\CourseController;
@@ -252,6 +253,7 @@ Route::get('/all-course/filter', [FrontendController::class, 'courseFilter']);
 /*  user subscribe  */
 Route::post('/user-subscribe', [FrontendController::class, 'userSubscribe'])->name('frontend.subscribe');
 
+/*  frontend course route  */
 
 Route::get('/course-details/{slug}', [FrontendController::class, 'view'])->name('course-details');
 Route::get('/category/{slug}', [FrontendController::class, 'courseCategory'])->name('course-category');
@@ -261,8 +263,12 @@ Route::get('/course/{category}/{subcategory}', [FrontendController::class, 'cour
 Route::get('/category-course/filter', [FrontendController::class, 'categoryCourseFilter']);
 
 
-
 Route::get('/all-category', [FrontendController::class, 'allCategory'])->name('all-category');
+
+Route::get('/all-courses/grid-view', [FrontendController::class, 'allCourseGrid'])->name('allCourseGrid');
+Route::get('/all-courses/list-view', [FrontendController::class, 'allCourseList'])->name('allCourseList');
+
+/*  Instructor details page  */
 
 Route::get('/instructor/{name}/{id}', [FrontendController::class, 'instructor'])->name('instructor');
 
@@ -294,6 +300,13 @@ Route::get('/blogs', [BlogController::class, 'allBlog'])->name('allBlog');
 
 Route::get('/blog-tag/{tag}', [BlogController::class, 'blogTag'])->name('blogTag');
 
+/* all Page Route  */
+
+Route::get('/about-us', [PageController::class, 'aboutUs'] )->name('aboutUs');
+Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contactUs');
+
+Route::post('/contact', [PageController::class, 'contact'])->name('contact');
+Route::get('/faq', [PageController::class, 'faq'])->name('faq');
 
 
 

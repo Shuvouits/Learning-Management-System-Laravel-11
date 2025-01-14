@@ -3,7 +3,7 @@
     <div class="container">
         <div class="d-flex align-items-center justify-content-between pb-3">
             <h3 class="fs-24 font-weight-semi-bold">My courses</h3>
-            <span class="ribbon ribbon-lg">24</span>
+            <span class="ribbon ribbon-lg">{{$user_course->count()}}</span>
         </div>
         <div class="divider"><span></span></div>
         <div class="row pt-30px">
@@ -45,22 +45,99 @@
                         </p>
 
 
+
                         <div class="rating-wrap d-flex align-items-center py-2">
                             <div class="review-stars">
-                                <span class="rating-number">4.4</span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star-o"></span>
+
+                                @php
+
+                                    $count_ratings = \App\Models\Review::where('status', 1)
+                                        ->where('course_id', $course->id)
+                                        ->count();
+                                    $unique_student = \App\Models\Review::where('status', 1)
+                                        ->where('course_id', $course->id)
+                                        ->distinct()
+                                        ->pluck('user_id')
+                                        ->count();
+
+                                    $averageRating = \App\Models\Review::where(
+                                        'course_id',
+                                        $course->id,
+                                    )
+                                        ->where('status', 1)
+                                        ->avg('rating');
+
+                                @endphp
+
+
+
+                                <span
+                                    class="rating-number">{{ number_format($averageRating, 1) }}</span>
+
+                                @php
+                                    $fullStars = floor($averageRating); // পূর্ণ তারকার সংখ্যা
+                                    $halfStar = $averageRating - $fullStars >= 0.5 ? 1 : 0; // অর্ধেক তারকা (যদি থাকে)
+                                    $emptyStars = 5 - $fullStars - $halfStar; // খালি তারকার সংখ্যা
+                                @endphp
+
+                                {{-- পূর্ণ তারকা --}}
+                                @for ($i = 0; $i < $fullStars; $i++)
+                                    <span class="la la-star"></span>
+                                @endfor
+
+                                {{-- অর্ধেক তারকা --}}
+                                @if ($halfStar)
+                                    <span class="la la-star-half"></span>
+                                @endif
+
+                                {{-- খালি তারকা --}}
+                                @for ($i = 0; $i < $emptyStars; $i++)
+                                    <span class="la la-star-o"></span>
+                                @endfor
+
+
+
                             </div>
-                            <span class="rating-total pl-1">(20,230)</span>
+                            <span class="rating-total pl-1">({{ $count_ratings }} ratings)</span>
+                            <span class="student-total pl-2">{{ $unique_student }} students</span>
+
                         </div><!-- end rating-wrap -->
+
+
+
+
+
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="card-price text-black font-weight-bold">${{$course->discount_price}} <span
                                     class="before-price font-weight-medium">{{$course->selling_price}}</span></p>
-                            <div class="icon-element icon-element-sm shadow-sm cursor-pointer"
-                                title="Add to Wishlist"><i class="la la-heart-o"></i></div>
+
+                                    <div class="icon-element icon-element-sm shadow-sm cursor-pointer wishlist-icon"
+                                    title="Add to Wishlist" data-course-id="{{ $course->id }}">
+
+                                    <?php
+                                    // Check if the user is authenticated
+                                    if (auth()->check()) {
+                                        $user_id = auth()->user()->id;
+
+                                        // Check if the course is in the wishlist
+                                        $isWishlisted = \App\Models\Wishlist::where('user_id', $user_id)
+                                            ->where('course_id', $course->id)
+                                            ->first();
+                                    } else {
+                                        $isWishlisted = null; // Default value for non-authenticated users
+                                    }
+                                    ?>
+
+                                    @if ($isWishlisted)
+                                        <i class="la la-heart"></i>
+                                    @else
+                                        <i class="la la-heart-o"></i>
+                                    @endif
+
+
+
+                                </div>
+                                
                         </div>
                     </div><!-- end card-body -->
                 </div><!-- end card -->
@@ -72,27 +149,9 @@
 
 
         </div><!-- end row -->
-        <div class="text-center pt-3">
-            <nav aria-label="Page navigation example" class="pagination-box">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true"><i class="la la-arrow-left"></i></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true"><i class="la la-arrow-right"></i></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <p class="fs-14 pt-2">Showing 1-6 of 24 results</p>
-        </div>
+
+
+
+        @include('frontend.section.pagination', ['data' => $user_course])
     </div><!-- end container -->
 </section><!-- end courses-area -->

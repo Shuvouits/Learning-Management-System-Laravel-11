@@ -36,10 +36,10 @@ $category = getCategories();
                     <div class="header-widget">
                         <ul class="generic-list-item d-flex flex-wrap align-items-center fs-14">
                             <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i
-                                    class="la la-phone mr-1"></i><a href="tel:00123456789"> (00) 123 456 789</a>
+                                    class="la la-phone mr-1"></i><a href="tel:{{getSiteInfo()->phone}}">{{getSiteInfo()->phone}}</a>
                             </li>
                             <li class="d-flex align-items-center"><i class="la la-envelope-o mr-1"></i><a
-                                    href="mailto:contact@aduca.com"> contact@aduca.com</a></li>
+                                    href="mailto:{{getSiteInfo()->mail}}">{{getSiteInfo()->mail}}</a></li>
                         </ul>
                     </div><!-- end header-widget -->
                 </div><!-- end col-lg-6 -->
@@ -212,6 +212,8 @@ $category = getCategories();
 
                                         <div  id="wishlist-course">
 
+                                            <!---ajax loaded wishlist  frontend.pages.home.partial.wishlist  -->
+
 
 
                                         </div>
@@ -225,6 +227,8 @@ $category = getCategories();
 
                             <div class="shop-cart mr-4" id='cart'>
 
+                                <!--ajax loaded for cart frontend.pages.home.partial.cart  -->
+
                             </div><!-- end shop-cart -->
 
 
@@ -235,7 +239,7 @@ $category = getCategories();
 
 
 
-                           
+
                         </div><!-- end menu-wrapper -->
                     </div><!-- end col-lg-10 -->
                 </div><!-- end row -->

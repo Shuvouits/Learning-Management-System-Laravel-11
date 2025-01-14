@@ -3,7 +3,7 @@
 
 @section('content')
 
-@include('frontend.section.breadcrumb')
+@include('frontend.section.breadcrumb', ['title' => 'All Blogs'])
 
 <section class="blog-area section--padding">
     <div class="container-fluid">

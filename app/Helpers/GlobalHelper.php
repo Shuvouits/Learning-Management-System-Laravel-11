@@ -1,6 +1,10 @@
 <?php
 
 use App\Models\Category;
+use App\Models\PageSetting;
+use App\Models\Partner;
+use App\Models\Review;
+use App\Models\SiteInfo;
 use App\Models\User;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
@@ -52,3 +56,50 @@ function auth_check_json()
         }
         return null;
     }
+
+
+
+    if (!function_exists('getSiteInfo')) {
+        function getSiteInfo()
+        {
+            // Fetch the first site info record
+            return SiteInfo::first();
+        }
+    }
+
+    if (!function_exists('getPageInfo')) {
+        function getPageInfo()
+        {
+            // Fetch the first site info record
+            return PageSetting::first();
+        }
+    }
+
+
+    
+
+
+    if (!function_exists('getInstructorInfo')) {
+        function getInstructorInfo()
+        {
+            // Fetch the first site info record
+            return User::where('role', 'instructor')->get();
+        }
+    }
+
+    if (!function_exists('studentReview')) {
+        function studentReview()
+        {
+            // Fetch the first site info record
+            return Review::with('user')->get();
+        }
+    }
+
+    if (!function_exists('partner')) {
+        function partner()
+        {
+            // Fetch the first site info record
+            return Partner::latest()->get();
+        }
+    }
+

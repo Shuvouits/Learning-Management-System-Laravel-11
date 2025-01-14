@@ -26,6 +26,7 @@ class FrontendController extends Controller
     public function index()
     {
 
+
         $course_category = Category::with('course', 'course.user', 'course.course_goal')->get();
         $categories = Category::all();
         $blogs = BlogPost::with('category')->get();
@@ -99,8 +100,8 @@ class FrontendController extends Controller
     public function courseCategory($slug)
     {
         $category = Category::where('slug', $slug)->first();
-        $course = Course::where('category_id', $category->id)->with('user', 'course_goal')->get();
-        return view('frontend.pages.category.index', compact('course'));
+        $course_data = Course::where('category_id', $category->id)->with('user')->paginate(10);
+        return view('frontend.pages.category.index', compact('course_data', 'category'));
     }
 
     public function courseSubcategory($category, $subcategory)
@@ -133,7 +134,7 @@ class FrontendController extends Controller
     {
 
         $user = User::find($id);
-        $user_course = Course::where('instructor_id', $user->id)->get();
+        $user_course = Course::where('instructor_id', $user->id)->paginate(10);
 
         return view('frontend.pages.instructor.index', compact('user', 'user_course'));
     }
@@ -378,6 +379,21 @@ class FrontendController extends Controller
             'html' => $html,
         ]);
     }
+
+
+    public function allCourseGrid(){
+        $all_courses = Course::with('user')->latest()->paginate(9);
+
+        return view('frontend.pages.all-courses.grid.index', compact('all_courses'));
+    }
+
+    public function allCourseList(){
+        $all_courses = Course::with('user')->latest()->paginate(9);
+
+        return view('frontend.pages.all-courses.list.index', compact('all_courses'));
+    }
+
+
 
 
 }

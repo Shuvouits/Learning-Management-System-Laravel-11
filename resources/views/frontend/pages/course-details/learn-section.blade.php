@@ -31,5 +31,5 @@
         <img width="70" class="mr-3" src="{{ asset('frontend/images/sponsor-img4.png') }}"
             alt="company logo">
     </div>
-    <a href="for-business.html" class="btn theme-btn theme-btn-sm">Try Aduca for Business</a>
+    <a href="/instructor/register" class="btn theme-btn theme-btn-sm">Try Aduca for Business</a>
 </div><!-- end course-overview-card -->

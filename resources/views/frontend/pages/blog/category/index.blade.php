@@ -3,28 +3,15 @@
 
 @section('content')
 
-<section class="breadcrumb-area section-padding img-bg-2">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="breadcrumb-content d-flex flex-wrap align-items-center justify-content-between">
-            <div class="section-heading">
-                <h2 class="section__title text-white">Blog List</h2>
-            </div>
-            <ul class="generic-list-item generic-list-item-white generic-list-item-arrow d-flex flex-wrap align-items-center">
-                <li><a href="/">Home</a></li>
-                <li>Blogs</li>
-                <li>Blog List</li>
-            </ul>
-        </div><!-- end breadcrumb-content -->
-    </div><!-- end container -->
-</section>
+
+@include('frontend.section.breadcrumb', ['title' => 'Blog List'])
 
 
 <section class="course-area section-padding">
     <div class="container">
         <div class="filter-bar mb-4">
             <div class="filter-bar-inner d-flex flex-wrap align-items-center justify-content-between">
-                <p class="fs-14">We found <span class="text-black">{{$blog_data['blogpost']->count()}}</span> courses available for you</p>
+                <p class="fs-14">We found <span class="text-black">{{$blog_data['blogpost']->count()}}</span> blogs available for you</p>
 
             </div><!-- end filter-bar-inner -->
 

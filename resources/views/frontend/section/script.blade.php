@@ -18,7 +18,10 @@ s
 <script src="{{ asset('frontend/js/jquery-te-1.4.0.min.js') }}"></script>
 <script src="{{ asset('frontend/js/jquery.MultiFile.min.js') }}"></script>
 
+
+
 <script src="{{ asset('frontend/js/main.js') }}"></script>
+
 <script>
     var player = new Plyr('#player');
 </script>
@@ -66,6 +69,7 @@ s
 
 
 <script src="{{ asset('customjs/wishlist/index.js') }}"></script>
+<script src="{{asset('customjs/cart/index.js')}}"></script>
 
 
 

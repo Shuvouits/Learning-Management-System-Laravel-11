@@ -16,7 +16,7 @@
                 </ul>
             </div><!-- end instructor-img -->
             <div class="media-body">
-                <h5><a href="teacher-detail.html">{{ $course['user']['name'] }}</a></h5>
+                <h5><a href="{{route('instructor',[ $course['user']['name'], $course['user']['id'] ] )}}">{{ $course['user']['name'] }}</a></h5>
 
                 <div class="bio-collapsible">
                     {!! $course['user']['bio'] !!}

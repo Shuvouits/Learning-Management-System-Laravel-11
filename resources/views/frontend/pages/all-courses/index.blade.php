@@ -1,7 +1,8 @@
 @extends('frontend.master')
 
 @section('content')
-    @include('frontend.pages.all-courses.breadcrumb')
+
+    @include('frontend.section.breadcrumb', ['title' => 'All Courses'])
 
     <section class="course-area section--padding">
         <div class="container">
@@ -117,5 +118,5 @@
         }
     </script>
 
-    
+
 @endpush

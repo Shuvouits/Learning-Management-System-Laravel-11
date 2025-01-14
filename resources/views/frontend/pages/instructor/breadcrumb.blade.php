@@ -5,7 +5,7 @@
         <div class="breadcrumb-content">
             <div class="media media-card align-items-center pb-4">
                 <div class="media-img media--img media-img-md rounded-full">
-                    <img class="rounded-full" src="{{asset('frontend/images/small-avatar-1.jpg')}}" alt="Student thumbnail image">
+                    <img class="rounded-full" src="{{asset($user->photo)}}" alt="Student thumbnail image">
                 </div>
                 <div class="media-body">
                     <h2 class="section__title fs-30">{{$user->name}}</h2>
