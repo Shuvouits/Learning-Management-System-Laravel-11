@@ -92,9 +92,9 @@
                         <form method="post" class="pt-4" action="{{route('login')}}">
                             @csrf
                             <div class="d-flex flex-wrap align-items-center pb-4">
-                                <button class="btn theme-btn flex-grow-1 mx-2 mb-2"><i class="la la-google mr-2"></i>Google</button>
-                                <button class="btn theme-btn flex-grow-1 mx-2 mb-2"><i class="la la-facebook mr-2"></i>Facebook</button>
-                                <button class="btn theme-btn flex-grow-1 mx-2 mb-2"><i class="la la-twitter mr-2"></i>Twitter</button>
+                                <a href="{{route('auth.google')}}" class="btn theme-btn flex-grow-1 mx-2 mb-2"><i class="la la-google mr-2"></i>Google</a>
+
+
                             </div>
                             <div class="text-center pt-3 pb-4">
                                 <div class="icon-element icon-element-md fs-25 shadow-sm">Or</div>
@@ -141,3 +141,27 @@
 </section><!-- end contact-area -->
 
 @endsection
+
+@push('scripts')
+
+<script>
+    @if (session('error'))
+        Swal.fire({
+            toast: true,
+            icon: 'error',
+            title: '{{ session('error') }}',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            customClass: {
+                popup: 'colored-toast' // Add a custom class for styling
+            },
+            background: 'red', // Green background for success
+            color: '#ffffff', // White text color
+            iconColor: '#ffffff', // White icon color
+        });
+    @endif
+</script>
+
+@endpush

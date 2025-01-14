@@ -39,6 +39,7 @@ use App\Http\Controllers\instructor\InstructorQuestionController;
 use App\Http\Controllers\instructor\InstructorReviewController;
 use App\Http\Controllers\instructor\LectureController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\UserCourseController;
 use App\Http\Controllers\user\UserProfileController;
@@ -53,6 +54,13 @@ use Chatify\Facades\ChatifyMessenger;
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');  */
+
+
+
+/*  Google Route  */
+
+Route::get('/auth/google', [SocialController::class, 'googleLogin'])->name('auth.google');
+Route::get('/auth/google-callback', [SocialController::class, 'googleAuthentication'])->name('auth.google-callback');
 
 
 
