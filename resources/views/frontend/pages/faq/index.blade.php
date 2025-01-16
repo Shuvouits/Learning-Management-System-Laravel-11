@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('frontend.section.breadcrumb')
+@include('frontend.section.breadcrumb', ['title' => 'FAQ'])
 
     <section class="faq-topic-area section--padding bg-gray">
         <div class="container">

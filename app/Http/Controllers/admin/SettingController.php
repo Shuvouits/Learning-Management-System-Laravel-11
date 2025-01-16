@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GoogleRequest;
 use App\Http\Requests\MailRequest;
 use App\Http\Requests\PusherRequest;
 use App\Http\Requests\StripeRequest;
+use App\Models\Google;
 use App\Models\Pusher;
 use App\Models\Smtp;
 use App\Models\Stripe;
@@ -55,5 +57,19 @@ class SettingController extends Controller
         Pusher::updateOrCreate(['id' => 1], $request->validated());
 
         return redirect()->back()->with('success', 'Pusher updated successfully!');
+    }
+
+    public function googleSetting(){
+        $google = Google::first();
+        return view('backend.admin.setting.google.index', compact('google'));
+
+    }
+
+    public function updateGoogleSettings(GoogleRequest $request)
+    {
+
+        Google::updateOrCreate(['id' => 1], $request->validated());
+
+        return redirect()->back()->with('success', 'Google updated successfully!');
     }
 }

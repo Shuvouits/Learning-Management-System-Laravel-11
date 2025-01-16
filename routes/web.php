@@ -106,8 +106,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::get('/mail-setting', [SettingController::class, 'mailSetting'])->name('mailSetting');
     Route::post('/mail-settings/update', [SettingController::class, 'updateMailSettings'])->name('mail.settings.update');
 
-    Route::get('stripe-setting', [SettingController::class, 'stripeSetting'])->name('stripeSetting');
+    Route::get('/stripe-setting', [SettingController::class, 'stripeSetting'])->name('stripeSetting');
     Route::post('/stripe-settings/update', [SettingController::class, 'updateStripeSettings'])->name('stripe.settings.update');
+
+    Route::get('/google-setting', [SettingController::class, 'googleSetting'])->name('googleSetting ');
+    Route::post('/google-settings/update', [SettingController::class, 'updateGoogleSettings'])->name('google.settings.update');
 
     Route::get('pusher-setting', [SettingController::class, 'pusherSetting'])->name('pusherSetting');
     Route::post('/pusher-settings/update', [SettingController::class, 'updatePusherSettings'])->name('pusher.settings.update');

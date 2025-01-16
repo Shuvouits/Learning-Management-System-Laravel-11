@@ -2,54 +2,10 @@ $(function() {
 
 
     // chart1
-    var ctx = document.getElementById('chart1').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-            datasets: [{
-                label: 'Google',
-                data: [6, 20, 14, 12, 17, 8, 10],
-                backgroundColor: [
-                    '#008cff'
-                ],
-                lineTension: 0.4,
-                borderColor: [
-                    '#008cff'
-                ],
-                borderWidth: 3
-            },
-            {
-                label: 'Facebook',
-                data: [5, 30, 16, 23, 8, 14, 11],
-                backgroundColor: [
-                    '#fd3550'
-                ],
-                tension: 0.4,
-                borderColor: [
-                    '#fd3550'
-                ],
-                borderWidth: 3
-            }]
-        },
-        options: {
-            maintainAspectRatio: false,
-            plugins: {
-				legend: {
-					position:'bottom',
-					display: true,
-				}
-			},
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
 
 
-    
+
+
     // chart2
     var ctx = document.getElementById('chart2').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -127,10 +83,10 @@ $(function() {
 					display: true,
 				}
 			},
-            
+
          }
      });
-    
+
 
 
       // chart4
@@ -160,13 +116,13 @@ $(function() {
 					display: true,
 				}
 			},
-             
+
           }
       });
 
 
 
-      
+
       // chart5
       var ctx = document.getElementById('chart5').getContext('2d');
       var myChart = new Chart(ctx, {
@@ -221,7 +177,7 @@ $(function() {
 
 
 
-      
+
       // chart6
       var ctx = document.getElementById('chart6').getContext('2d');
       var myChart = new Chart(ctx, {
@@ -264,7 +220,7 @@ $(function() {
       });
 
 
-    
+
 
 // chart7
 var ctx = document.getElementById('chart7').getContext('2d');
@@ -378,7 +334,7 @@ var myChart = new Chart(ctx, {
 					target: 'origin',
 					above: 'rgb(21 202 32 / 20%)',   // Area will be red above the origin
 					//below: 'rgb(21 202 32 / 100%)'   // And blue below the origin
-				  }, 
+				  },
                 tension: 0.4,
                 borderColor: [
                     '#15ca20'
@@ -404,5 +360,5 @@ var myChart = new Chart(ctx, {
         }
     });
 
-    
+
 });
