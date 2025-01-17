@@ -175,33 +175,7 @@
                 });
 
                 // Attach new click event listener
-                $('#send-message').on('click', function() {
 
-                    e.preventDefault();
-
-
-                    const messageInput = $('#message');
-                    const message = messageInput.val();
-
-                    if (message.trim() === '') return;
-
-                    axios.post('/instructor/send-message', {
-                            message: message,
-                            user_id: user_id,
-                            _token: "{{ csrf_token() }}"
-                        })
-                        .then(response => {
-
-
-                            console.log(response.data);
-                            // Correct way to clear the value of an input field
-
-
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        });
-                });
 
                 // Extending dayjs with relativeTime plugin
                 dayjs.extend(dayjs_plugin_relativeTime);
@@ -234,11 +208,6 @@
                                 </div>
                              </div>
 
-
-
-
-
-
                             `;
                             $('#chat-box').append(userMessageHtml);
 
@@ -270,7 +239,11 @@
                                 `;
                                 $('#chat-box').append(instructorMessageHtml);
                             });
+
+
                         });
+
+
                     },
                     error: function(error) {
                         console.error("Something went wrong:", error);
@@ -322,6 +295,42 @@
                 chatBox.scrollTop(chatBox[0].scrollHeight);
 
 
+            });
+
+        })
+    </script>
+
+    <script>
+        $(document).on('click', '.instructor-card', function(e) {
+
+            const user_id = $(this).data('id');
+
+            $('#send-message').on('click', function(e) {
+
+                e.preventDefault();
+
+
+                const messageInput = $('#message');
+                const message = messageInput.val();
+
+                if (message.trim() === '') return;
+
+                axios.post('/instructor/send-message', {
+                        message: message,
+                        user_id: user_id,
+                        _token: "{{ csrf_token() }}"
+                    })
+                    .then(response => {
+
+
+                        console.log(response.data);
+                        // Correct way to clear the value of an input field
+
+
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
             });
 
         })

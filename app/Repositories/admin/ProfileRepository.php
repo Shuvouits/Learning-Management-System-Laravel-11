@@ -38,6 +38,11 @@ class ProfileRepository
         $profile->phone = $data['phone'] ?? $profile->phone;
         $profile->address = $data['address'] ?? $profile->address;
         $profile->bio = $data['bio'] ?? $profile->bio;
+        $profile->city = $data['city'] ?? $profile->city;
+        $profile->country = $data['country'] ?? $profile->country;
+        $profile->gender = $data['gender'] ?? $profile->gender;
+        $profile->experience = $data['experience'] ?? $profile->experience;
+        $profile->professional_info = $data['professional_info'] ?? $profile->professional_info;
 
         // Save the intro
         $profile->save();

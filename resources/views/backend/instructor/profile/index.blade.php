@@ -73,6 +73,59 @@
 
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
+                                            <h6 class="mb-0">City</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="text" name="city" class="form-control"
+                                                value="{{ auth()->user()->city }}" placeholder="Enter your city" />
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Country</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="text" name="country" class="form-control"
+                                                value="{{ auth()->user()->country }}" placeholder="Enter your country" />
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Gender</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <select class="form-select" name="gender">
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="other">Other</option>
+
+                                              </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Experience</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="text" name="experience" class="form-control"
+                                                value="{{ auth()->user()->experience }}" placeholder="Example : Web Developer, Designer, and Teacher" />
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Bio</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <textarea placeholder="Enter your bio" class="form-control" name="bio" rows="6">{{ auth()->user()->bio }}</textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
                                             <h6 class="mb-0">Address</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">

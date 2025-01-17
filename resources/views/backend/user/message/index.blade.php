@@ -169,6 +169,8 @@
                 const name = $(this).data('name');
                 const instructor_id = $(this).data('id');
 
+
+
                 $('#user-photo').attr('src', photo);
                 $('#user-name').text(name);
                 $('#chat-box').empty();
@@ -178,31 +180,7 @@
 
 
                 // Attach new click event listener
-                $('#send-message').on('click', function() {
 
-
-                    const messageInput = $('#message');
-                    const message = messageInput.val();
-
-                    if (message.trim() === '') return;
-
-                    axios.post('/user/send-message', {
-                            message: message,
-                            instructor_id: instructor_id,
-                            _token: "{{ csrf_token() }}"
-                        })
-                        .then(response => {
-
-
-                            console.log(response.data);
-                            // Correct way to clear the value of an input field
-
-
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        });
-                });
 
                 // Fetch messages via AJAX
                 $.ajax({
@@ -265,11 +243,11 @@
 
             // Pusher event
             channel.bind('my-event', function(data) {
-                 //alert(JSON.stringify(data));
+                //alert(JSON.stringify(data));
                 const chatBox = $('#chat-box');
 
                 // Determine class based on sender
-               const senderType = data.sender === 'user' ? 'message-replay' : 'message-sent';
+                const senderType = data.sender === 'user' ? 'message-replay' : 'message-sent';
 
 
                 const messageHtml = `
@@ -364,16 +342,40 @@
             });
         });
     </script>
+
+    <script>
+        $(document).on('click', '.instructor-card', function(e) {
+
+            const instructor_id = $(this).data('id');
+
+            $('#send-message').on('click', function() {
+
+
+                const messageInput = $('#message');
+                const message = messageInput.val();
+
+
+
+                if (message.trim() === '') return;
+
+                axios.post('/user/send-message', {
+                        message: message,
+                        instructor_id: instructor_id,
+                        _token: "{{ csrf_token() }}"
+                    })
+                    .then(response => {
+
+
+                        console.log(response.data);
+                        // Correct way to clear the value of an input field
+
+
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            });
+
+        })
+    </script>
 @endpush
-
-
-
-
-
-
-
-
-
-
-
-
